@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyTinyBlog.Data.Contracts
+﻿namespace MyTinyBlog.Data.Contracts
 {
-    interface IAuditInfo
+    using System;
+
+    public interface IAuditInfo
     {
+        DateTime CreatedOn { get; set; }
+
+        bool PreserveCreatedOn { get; set; }
+
+        DateTime? ModifiedOn { get; set; }
     }
 }

@@ -260,6 +260,20 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\MyTintBlog.Data.Models\MyTintBlog.Data.Models.csproj">
+      <Project>{642799c5-96af-4820-91ae-ff9ece32684f}</Project>
+      <Name>MyTintBlog.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\MyTinyBlog.Data.Contracts\MyTinyBlog.Data.Contracts.csproj">
+      <Project>{f1733f52-3604-4b4d-a131-abbd7c2aeab2}</Project>
+      <Name>MyTinyBlog.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\MyTinyBlog.Data\MyTinyBlog.Data.csproj">
+      <Project>{34f09c77-da02-4418-97b1-60e977c37b4b}</Project>
+      <Name>MyTinyBlog.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

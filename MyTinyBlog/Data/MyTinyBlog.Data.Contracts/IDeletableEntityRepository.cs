@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyTinyBlog.Data.Contracts
+﻿namespace MyTinyBlog.Data.Contracts
 {
-    interface IDeletableEntityRepository
+    using System.Linq;
+
+    public interface IDeletableEntityRepository<T> : IRepository<T> where T : class
     {
+        IQueryable<T> AllWithDeleted();
     }
 }
