@@ -12,3 +12,5 @@ C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTintBlog.Dat
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTintBlog.Data.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTintBlog.Data.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTintBlog.Data.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTintBlog.Data.Models\bin\Debug\MyTinyBlog.Data.Contracts.dll
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTintBlog.Data.Models\bin\Debug\MyTinyBlog.Data.Contracts.pdb

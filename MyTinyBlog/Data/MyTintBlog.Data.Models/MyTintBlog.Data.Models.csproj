@@ -58,11 +58,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="BlogPost.cs" />
+    <Compile Include="Enums\BlogPostType.cs" />
+    <Compile Include="ContentHolder.cs" />
+    <Compile Include="Enums\VideoProvider.cs" />
+    <Compile Include="Page.cs" />
+    <Compile Include="PostComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setting.cs" />
+    <Compile Include="Tag.cs" />
+    <Compile Include="Video.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyTinyBlog.Data.Contracts\MyTinyBlog.Data.Contracts.csproj">
+      <Project>{f1733f52-3604-4b4d-a131-abbd7c2aeab2}</Project>
+      <Name>MyTinyBlog.Data.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
