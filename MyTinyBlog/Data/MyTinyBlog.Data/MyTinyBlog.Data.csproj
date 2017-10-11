@@ -59,12 +59,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMyTinyBlogContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyTinyBlogContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyTintBlog.Data.Models\MyTinyBlog.Data.Models.csproj">
+      <Project>{642799c5-96af-4820-91ae-ff9ece32684f}</Project>
+      <Name>MyTinyBlog.Data.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

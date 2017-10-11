@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyTintBlog.Data.Models
+namespace MyTinyBlog.Data.Models
 {
     public class Tag
     {

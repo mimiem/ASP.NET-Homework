@@ -1,4 +1,4 @@
-﻿namespace MyTintBlog.Data.Models
+﻿namespace MyTinyBlog.Data.Models
 {
     using MyTinyBlog.Data.Contracts;
     using System.Collections.Generic;

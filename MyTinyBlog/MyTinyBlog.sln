@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTinyBlog.Web", "MyTinyBlo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTinyBlog.Data", "Data\MyTinyBlog.Data\MyTinyBlog.Data.csproj", "{34F09C77-DA02-4418-97B1-60E977C37B4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTintBlog.Data.Models", "Data\MyTintBlog.Data.Models\MyTintBlog.Data.Models.csproj", "{642799C5-96AF-4820-91AE-FF9ECE32684F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTinyBlog.Data.Models", "Data\MyTintBlog.Data.Models\MyTinyBlog.Data.Models.csproj", "{642799C5-96AF-4820-91AE-FF9ECE32684F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTinyBlog.Data.Contracts", "Data\MyTinyBlog.Data.Contracts\MyTinyBlog.Data.Contracts.csproj", "{F1733F52-3604-4B4D-A131-ABBD7C2AEAB2}"
 EndProject

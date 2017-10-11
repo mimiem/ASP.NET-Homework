@@ -1,4 +1,4 @@
-﻿namespace MyTintBlog.Data.Models.Enums
+﻿namespace MyTinyBlog.Data.Models.Enums
 {
     public enum BlogPostType
     {

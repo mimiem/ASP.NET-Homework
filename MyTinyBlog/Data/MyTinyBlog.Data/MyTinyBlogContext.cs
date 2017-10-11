@@ -1,8 +1,8 @@
 namespace MyTinyBlog.Data
 {
-    using System;
+    using Migrations;
+    using MyTintBlog.Data.Models;
     using System.Data.Entity;
-    using System.Linq;
 
     public class MyTinyBlogContext : DbContext
     {
@@ -15,6 +15,7 @@ namespace MyTinyBlog.Data
         public MyTinyBlogContext()
             : base("name=MyTinyBlogContext")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MyTinyBlogContext, Configuration>());
         }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
@@ -28,7 +29,19 @@ namespace MyTinyBlog.Data
             return new MyTinyBlogContext();
 
         }
-        
+
+        public IDbSet<BlogPost> BlogPosts { get; set; }
+
+        public IDbSet<Page> Pages { get; set; }
+
+        public IDbSet<Tag> Tags { get; set; }
+
+        public IDbSet<PostComment> PostComments { get; set; }
+
+        public IDbSet<Setting> Settings { get; set; }
+
+        public IDbSet<Video> Videos { get; set; }
+
     }
 
     //public class MyEntity

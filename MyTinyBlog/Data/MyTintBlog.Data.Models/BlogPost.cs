@@ -1,4 +1,4 @@
-﻿namespace MyTintBlog.Data.Models
+﻿namespace MyTinyBlog.Data.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
