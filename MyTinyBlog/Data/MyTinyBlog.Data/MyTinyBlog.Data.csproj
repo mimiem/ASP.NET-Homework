@@ -73,6 +73,10 @@
       <Project>{642799c5-96af-4820-91ae-ff9ece32684f}</Project>
       <Name>MyTinyBlog.Data.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyTinyBlog.Data.Contracts\MyTinyBlog.Data.Contracts.csproj">
+      <Project>{f1733f52-3604-4b4d-a131-abbd7c2aeab2}</Project>
+      <Name>MyTinyBlog.Data.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

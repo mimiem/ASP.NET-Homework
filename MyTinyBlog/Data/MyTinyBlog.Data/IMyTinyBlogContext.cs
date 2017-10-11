@@ -1,16 +1,13 @@
-﻿using MyTinyBlog.Data.Models;
-using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-
-
-namespace MyTinyBlog.Data
+﻿namespace MyTinyBlog.Data
 {
+    using Models;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+
     public interface IMyTinyBlogContext : IDisposable
     {
         IDbSet<BlogPost> BlogPosts { get; set; }
-
-        IDbSet<Page> Pages { get; set; }
 
         IDbSet<Tag> Tags { get; set; }
 

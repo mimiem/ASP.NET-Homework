@@ -1,10 +1,14 @@
 namespace MyTinyBlog.Data
 {
+    using Contracts;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using Migrations;
-    using MyTintBlog.Data.Models;
+    using Models;
+    using System;
     using System.Data.Entity;
+    using System.Linq;
 
-    public class MyTinyBlogContext : DbContext
+    public class MyTinyBlogContext : IdentityDbContext<ApplicationUser>, IMyTinyBlogContext
     {
         // Your context has been configured to use a 'MyTinyBlogContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
@@ -18,11 +22,6 @@ namespace MyTinyBlog.Data
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MyTinyBlogContext, Configuration>());
         }
 
-        // Add a DbSet for each entity type that you want to include in your model. For more information 
-        // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
-
-        // public virtual DbSet<MyEntity> MyEntities { get; set; }
-
         public static MyTinyBlogContext Create()
         {
 
@@ -32,8 +31,6 @@ namespace MyTinyBlog.Data
 
         public IDbSet<BlogPost> BlogPosts { get; set; }
 
-        public IDbSet<Page> Pages { get; set; }
-
         public IDbSet<Tag> Tags { get; set; }
 
         public IDbSet<PostComment> PostComments { get; set; }
@@ -42,7 +39,61 @@ namespace MyTinyBlog.Data
 
         public IDbSet<Video> Videos { get; set; }
 
+        public override int SaveChanges()
+        {
+            this.ApplyAuditInfoRules();
+            this.ApplyDeletableEntityRules();
+            return base.SaveChanges();
+        }
+
+        public new IDbSet<T> Set<T>() where T : class
+        {
+            return base.Set<T>();
+        }
+
+        private void ApplyAuditInfoRules()
+        {
+            // Approach via @julielerman: http://bit.ly/123661P
+            foreach (var entry in
+                this.ChangeTracker.Entries()
+                    .Where(
+                        e =>
+                        e.Entity is IAuditInfo && ((e.State == EntityState.Added) || (e.State == EntityState.Modified))))
+            {
+                var entity = (IAuditInfo)entry.Entity;
+
+                if (entry.State == EntityState.Added)
+                {
+                    if (!entity.PreserveCreatedOn)
+                    {
+                        entity.CreatedOn = DateTime.Now;
+                    }
+                }
+                else
+                {
+                    entity.ModifiedOn = DateTime.Now;
+                }
+            }
+        }
+
+        private void ApplyDeletableEntityRules()
+        {
+            // Approach via @julielerman: http://bit.ly/123661P
+            foreach (
+                var entry in
+                    this.ChangeTracker.Entries()
+                        .Where(e => e.Entity is IDeletableEntity && (e.State == EntityState.Deleted)))
+            {
+                var entity = (IDeletableEntity)entry.Entity;
+
+                entity.DeletedOn = DateTime.Now;
+                entity.IsDeleted = true;
+                entry.State = EntityState.Modified;
+            }
+        }
     }
+
+
 
     //public class MyEntity
     //{

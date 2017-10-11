@@ -1,7 +1,6 @@
 ﻿namespace MyTinyBlog.Data.Models
 {
     using MyTinyBlog.Data.Contracts;
-    using MyTinyBlog.Data.Models;
 
     public class PostComment : DeletableEntity
     {
