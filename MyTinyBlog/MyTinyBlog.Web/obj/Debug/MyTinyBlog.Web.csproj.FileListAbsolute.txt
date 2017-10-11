@@ -73,3 +73,8 @@ C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\MyTinyBlog.Web\bin\
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\MyTinyBlog.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\MyTinyBlog.Web\obj\Debug\MyTinyBlog.Web.dll
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\MyTinyBlog.Web\obj\Debug\MyTinyBlog.Web.pdb
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\MyTinyBlog.Web\bin\Glimpse.Ado.dll
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\MyTinyBlog.Web\bin\Glimpse.AspNet.dll
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\MyTinyBlog.Web\bin\Glimpse.Core.dll
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\MyTinyBlog.Web\bin\Glimpse.EF6.dll
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\MyTinyBlog.Web\bin\Glimpse.Mvc5.dll
