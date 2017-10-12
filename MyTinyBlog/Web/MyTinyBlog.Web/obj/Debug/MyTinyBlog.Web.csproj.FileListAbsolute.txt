@@ -68,3 +68,7 @@ C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Web\MyTinyBlog.Web\
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Web\MyTinyBlog.Web\bin\Ninject.xml
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Web\MyTinyBlog.Web\bin\Ninject.Web.Common.xml
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Web\MyTinyBlog.Web\bin\Ninject.Web.Mvc.xml
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Web\MyTinyBlog.Web\bin\MyTinyBlog.Services.Data.dll
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Web\MyTinyBlog.Web\bin\MyTinyBlog.Web.ViewModels.dll
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Web\MyTinyBlog.Web\bin\MyTinyBlog.Services.Data.pdb
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Web\MyTinyBlog.Web\bin\MyTinyBlog.Web.ViewModels.pdb

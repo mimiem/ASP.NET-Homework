@@ -6,8 +6,8 @@
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Cookies;
     using Owin;
-    using MyTinyBlog.Data;
-    using MyTinyBlog.Data.Models;
+    using Data;
+    using Data.Models;
 
     public partial class Startup
     {

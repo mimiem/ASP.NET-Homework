@@ -195,36 +195,30 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
-    <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
-    <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Account\ForgotViewModel.cs" />
-    <Compile Include="ViewModels\Account\LoginViewModel.cs" />
-    <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
-    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
-    <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
-    <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
-    <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
-    <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
-    <Compile Include="ViewModels\Manage\IndexViewModel.cs" />
-    <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
-    <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\themes\simple\images\arrow.png" />
+    <Content Include="Content\themes\simple\images\back.png" />
+    <Content Include="Content\themes\simple\images\bullet.png" />
+    <Content Include="Content\themes\simple\images\graphic.png" />
+    <Content Include="Content\themes\simple\images\link.png" />
+    <Content Include="Content\themes\simple\images\logo.jpg" />
+    <Content Include="Content\themes\simple\images\logo.png" />
+    <Content Include="Content\themes\simple\images\search.png" />
+    <Content Include="Content\themes\simple\images\tabs.png" />
+    <Content Include="Content\themes\simple\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -289,6 +283,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Blog\List.cshtml" />
+    <Content Include="Views\Shared\_PostTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -311,6 +307,14 @@
     <ProjectReference Include="..\..\Data\MyTinyBlog.Data\MyTinyBlog.Data.csproj">
       <Project>{d0054277-091c-429f-8a73-c8932c9634b1}</Project>
       <Name>MyTinyBlog.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\MyTinyBlog.Services.Data\MyTinyBlog.Services.Data.csproj">
+      <Project>{3e136553-d99b-486b-9990-1555b18e9776}</Project>
+      <Name>MyTinyBlog.Services.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyTinyBlog.Web.ViewModels\MyTinyBlog.Web.ViewModels.csproj">
+      <Project>{f8626c29-445b-4c1a-8141-c9d4a50d6063}</Project>
+      <Name>MyTinyBlog.Web.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

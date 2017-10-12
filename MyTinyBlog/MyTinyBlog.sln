@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTinyBlog.Web", "Web\MyTin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTinyBlog.Data.Contracts", "Data\MyTinyBlog.Data.Contracts\MyTinyBlog.Data.Contracts.csproj", "{925277F1-9236-4E1D-B654-408E9E57F42C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTinyBlog.Services.Data", "Services\MyTinyBlog.Services.Data\MyTinyBlog.Services.Data.csproj", "{3E136553-D99B-486B-9990-1555B18E9776}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTinyBlog.Web.ViewModels", "Web\MyTinyBlog.Web.ViewModels\MyTinyBlog.Web.ViewModels.csproj", "{F8626C29-445B-4C1A-8141-C9D4A50D6063}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{925277F1-9236-4E1D-B654-408E9E57F42C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{925277F1-9236-4E1D-B654-408E9E57F42C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{925277F1-9236-4E1D-B654-408E9E57F42C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E136553-D99B-486B-9990-1555B18E9776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E136553-D99B-486B-9990-1555B18E9776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E136553-D99B-486B-9990-1555B18E9776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E136553-D99B-486B-9990-1555B18E9776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8626C29-445B-4C1A-8141-C9D4A50D6063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8626C29-445B-4C1A-8141-C9D4A50D6063}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8626C29-445B-4C1A-8141-C9D4A50D6063}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8626C29-445B-4C1A-8141-C9D4A50D6063}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +60,7 @@ Global
 		{D73E3E43-2C34-444C-9351-EE27613D0429} = {6358BB6D-EF0B-4D6E-BA69-081E45B08E09}
 		{D41C39AC-4091-4FDE-9ECC-42B7FDAF92A9} = {455E3CF0-6B69-4B47-905D-BF3D507EB6EE}
 		{925277F1-9236-4E1D-B654-408E9E57F42C} = {6358BB6D-EF0B-4D6E-BA69-081E45B08E09}
+		{3E136553-D99B-486B-9990-1555B18E9776} = {A1835AD8-5A48-46AA-AD4A-A1EDF09CD9D9}
+		{F8626C29-445B-4C1A-8141-C9D4A50D6063} = {455E3CF0-6B69-4B47-905D-BF3D507EB6EE}
 	EndGlobalSection
 EndGlobal
