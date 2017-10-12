@@ -198,6 +198,8 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Extensions\ActionLinkExtensions.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -285,6 +287,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Blog\List.cshtml" />
     <Content Include="Views\Shared\_PostTemplate.cshtml" />
+    <Content Include="App_Code\Helpers.cshtml" />
+    <Content Include="Views\Shared\_Pager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

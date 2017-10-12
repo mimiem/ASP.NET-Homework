@@ -1,0 +1,10 @@
+﻿@helper Tags(System.Web.Mvc.HtmlHelper htmlHelper,
+    IEnumerable<MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog.TagViewModel> tags)
+{
+foreach (var tag in tags)
+{
+        <div class="tags-div">
+            @MyTinyBlog.Web.Extensions.ActionLinkExtensions.TagLink(htmlHelper, tag)
+        </div>
+}
+}

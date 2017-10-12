@@ -2,6 +2,7 @@
 {
     using Data.Contracts;
     using Data.Models;
+    using MyTinyBlog.Web.ViewModels.Blog;
     using Services.Data;
     using System.Web.Mvc;
 
@@ -29,7 +30,7 @@
         /// <returns></returns>
         public ViewResult Posts(int p = 1)
         {
-            var listViewModel = this.service.GetList(p, this.posts, this.categories, this.tags);
+            ListViewModel listViewModel = this.service.GetList(p, this.posts, this.categories, this.tags);
 
             ViewBag.Title = "Latest Posts";
 

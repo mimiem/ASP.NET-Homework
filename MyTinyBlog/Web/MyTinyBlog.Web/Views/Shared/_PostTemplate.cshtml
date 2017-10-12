@@ -1,4 +1,5 @@
-﻿@model MyTinyBlog.Web.ViewModels.Blog.BlogPostViewModel
+﻿@using MyTinyBlog.Web.Extensions
+@model MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog.BlogPostViewModel
 
 <div class="post">
     <div class="post-meta">
@@ -25,7 +26,7 @@
 
             <!--Posted date-->
             <div class="posted-date">
-                @Model.PostedOn.ToConfigLocalTime()
+                @Model.CreatedOn      @*.ToConfigLocalTime()*@
             </div>
 
         </div>
@@ -34,16 +35,16 @@
 
     <!--Short Description-->
     <div class="post-body">
-        @Html.Raw(Model.ShortDescription)
+        @Html.Raw(Model.ShortContent)
     </div>
 
     <div class="post-foot">
         @Html.ActionLink("continue...", "post", "blog",
         new
         {
-            year = Model.PostedOn.Year,
-            month = Model.PostedOn.Month,
-            day = Model.PostedOn.Day,
+            year = Model.CreatedOn.Year,
+            month = Model.CreatedOn.Month,
+            day = Model.CreatedOn.Day,
             title = Model.UrlSlug
         },
         new { title = "continue..." }

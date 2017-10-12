@@ -15,9 +15,7 @@
 
         public string UrlSlug { get; set; }
 
-        public string CategoryName { get; set; }
-
-        public string CategoryUrlSlug { get; set; }
+        public CategoryViewModel Category { get; set; }
 
         public IEnumerable<TagViewModel> Tags { get; set; }
     }
