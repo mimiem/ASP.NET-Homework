@@ -1,4 +1,4 @@
-﻿namespace MyTinyBlog.Data.Repositories
+﻿namespace MyTinyBlog.Data.Repositories.Base
 {
     using Contracts;
     using System;
