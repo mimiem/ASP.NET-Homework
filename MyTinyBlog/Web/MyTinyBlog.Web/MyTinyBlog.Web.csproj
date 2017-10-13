@@ -211,15 +211,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\themes\simple\images\arrow.png" />
-    <Content Include="Content\themes\simple\images\back.png" />
-    <Content Include="Content\themes\simple\images\bullet.png" />
-    <Content Include="Content\themes\simple\images\graphic.png" />
-    <Content Include="Content\themes\simple\images\link.png" />
-    <Content Include="Content\themes\simple\images\logo.jpg" />
-    <Content Include="Content\themes\simple\images\logo.png" />
-    <Content Include="Content\themes\simple\images\search.png" />
-    <Content Include="Content\themes\simple\images\tabs.png" />
+    <Content Include="Content\themes\simple\arrow.png" />
+    <Content Include="Content\themes\simple\back.png" />
+    <Content Include="Content\themes\simple\bullet.png" />
+    <Content Include="Content\themes\simple\graphic.png" />
+    <Content Include="Content\themes\simple\link.png" />
+    <Content Include="Content\themes\simple\logo.jpg" />
+    <Content Include="Content\themes\simple\logo.png" />
+    <Content Include="Content\themes\simple\search.png" />
+    <Content Include="Content\themes\simple\tabs.png" />
     <Content Include="Content\themes\simple\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -292,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\themes\simple\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

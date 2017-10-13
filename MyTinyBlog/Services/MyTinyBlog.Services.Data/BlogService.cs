@@ -9,10 +9,26 @@
 
     public class BlogService
     {
-        public ListViewModel GetList(int p, IRepository<BlogPost> posts, IRepository<Category> categories, IRepository<Tag> tags)
+        public ListViewModel GetList(int pageNo, IRepository<BlogPost> posts, IRepository<Category> categories, IRepository<Tag> tags)
         {
             // pick latest 10 posts
-            var postsVM = this.Posts(p - 1, 10, posts, categories, tags);
+            List<BlogPost> postsNeeded = posts.All()
+                               .Where(p => p.IsDeleted == false)
+                               .OrderByDescending(p => p.CreatedOn)
+                               .Skip((pageNo - 1) * 10)
+                               .Take(10)
+                               .ToList();
+
+            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
+            {
+                Title = p.Title,
+                Content = p.Content,
+                ShortContent = p.ShortContent,
+                CreatedOn = p.CreatedOn,
+                UrlSlug = p.UrlSlug,
+                Category = this.GetCategory(p.CategoryId, categories),
+                Tags = this.GetTags(p.Tags, tags)
+            });
 
             int totalPosts = posts.All().Count();
 
@@ -25,29 +41,35 @@
             return listViewModel;
         }
 
-        private IEnumerable<BlogPostViewModel> Posts(int pageNo, int pageSize, IRepository<BlogPost> posts, IRepository<Category> categories, IRepository<Tag> tags)
+        public ListViewModel GetListPostsByCategory(string categorySlug, int pageNo, IRepository<BlogPost> posts, 
+            IRepository<Category> categories, IRepository<Tag> tags)
         {
+
             List<BlogPost> postsNeeded = posts.All()
-                               .Where(p => p.IsDeleted == false)
+                               .Where(p => p.IsDeleted == false && p.Category.UrlSlug == categorySlug)
                                .OrderByDescending(p => p.CreatedOn)
-                               .Skip(pageNo * pageSize)
-                               .Take(pageSize)
+                               .Skip((pageNo - 1) * 10)
+                               .Take(10)
                                .ToList();
 
             var postsVM = postsNeeded.Select(p => new BlogPostViewModel
-                                                   {
-                                                       Title = p.Title,
-                                                       Content = p.Content,
-                                                       ShortContent = p.ShortContent,
-                                                       CreatedOn = p.CreatedOn,
-                                                       UrlSlug = p.UrlSlug,
-                                                       Category = this.GetCategory(p.CategoryId, categories),
-                                                       Tags = this.GetTags(p.Tags, tags)
-                                                   });
+            {
+                Title = p.Title,
+                Content = p.Content,
+                ShortContent = p.ShortContent,
+                CreatedOn = p.CreatedOn,
+                UrlSlug = p.UrlSlug,
+                Category = this.GetCategory(p.CategoryId, categories),
+                Tags = this.GetTags(p.Tags, tags)
+            });
 
-            return postsVM;
+            var listViewModel = new ListViewModel
+            {
+                Posts = postsVM,
+                TotalPosts = postsVM.Count()
+            };
 
-           
+            return listViewModel;
         }
 
         private IEnumerable<TagViewModel> GetTags(ICollection<Tag> targetTags, IRepository<Tag> baseTags)
