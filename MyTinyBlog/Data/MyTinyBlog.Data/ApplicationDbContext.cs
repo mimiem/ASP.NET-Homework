@@ -1,6 +1,7 @@
 ﻿namespace MyTinyBlog.Data
 {
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Migrations;
     using Models;
     using System.Data.Entity;
 
@@ -9,6 +10,7 @@
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
         public static ApplicationDbContext Create()

@@ -12,7 +12,7 @@ namespace MyTinyBlog.Web.App_Start
     using Ninject.Web.Common;
     using System.Data.Entity;
     using Data;
- 
+    using Services.Data.Contracts;
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -64,7 +64,7 @@ namespace MyTinyBlog.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<DbContext>().To<ApplicationDbContext>();
-
+            kernel.Bind<IBlogService>().To<IBlogService>();
         }        
     }
 }

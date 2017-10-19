@@ -9,14 +9,16 @@
 
     public class BlogService : Service
     {
-        public ListViewModel GetList(int pageNo, IRepository<BlogPost> posts, IRepository<Category> categories, IRepository<Tag> tags)
+        public ListViewModel GetList(int pageNo)
         {
             // pick latest 10 posts
-            List<BlogPost> postsNeeded = posts.All()
-                               .OrderByDescending(p => p.CreatedOn)
-                               .Skip((pageNo - 1) * 10)
-                               .Take(10)
-                               .ToList();
+            IEnumerable<BlogPost> postsNeeded = this.Context
+                                             .Posts
+                                             .Where(p => p.Published)
+                                             .OrderByDescending(p => p.CreatedOn)
+                                             .Skip((pageNo - 1) * 10)
+                                             .Take(10)
+                                             .ToList();
 
             var postsVM = postsNeeded.Select(p => new BlogPostViewModel
             {
@@ -25,11 +27,11 @@
                 ShortContent = p.ShortContent,
                 CreatedOn = p.CreatedOn,
                 UrlSlug = p.UrlSlug,
-                Category = this.GetCategory(p.CategoryId, categories),
-                Tags = this.GetTags(p.Tags, tags)
+                Category = this.GetCategory(p.CategoryId),
+                //Tags = this.GetTags(p.Tags)
             });
 
-            int totalPosts = posts.All().Count();
+            int totalPosts = this.Context.Posts.Count();
 
             var listViewModel = new ListViewModel
             {
@@ -40,15 +42,15 @@
             return listViewModel;
         }
 
-        public ListViewModel GetListPostsByCategory(string categorySlug, int pageNo, IRepository<BlogPost> posts, 
-            IRepository<Category> categories, IRepository<Tag> tags)
+        public ListViewModel GetListPostsByCategory(string categorySlug, int pageNo)
         {
 
-            List<BlogPost> postsNeeded = posts.All()
-                               .OrderByDescending(p => p.CreatedOn)
-                               .Skip((pageNo - 1) * 10)
-                               .Take(10)
-                               .ToList();
+            IEnumerable<BlogPost> postsNeeded = this.Context.Posts
+                                             .Where(p => p.Published && p.Category.UrlSlug == categorySlug)
+                                             .OrderByDescending(p => p.CreatedOn)
+                                             .Skip((pageNo - 1) * 10)
+                                             .Take(10)
+                                             .ToList();
 
             var postsVM = postsNeeded.Select(p => new BlogPostViewModel
             {
@@ -57,8 +59,8 @@
                 ShortContent = p.ShortContent,
                 CreatedOn = p.CreatedOn,
                 UrlSlug = p.UrlSlug,
-                Category = this.GetCategory(p.CategoryId, categories),
-                Tags = this.GetTags(p.Tags, tags)
+                Category = this.GetCategory(p.CategoryId),
+                //Tags = this.GetTags(p.Tags)
             });
 
             var listViewModel = new ListViewModel
@@ -70,25 +72,24 @@
             return listViewModel;
         }
 
-        private IEnumerable<TagViewModel> GetTags(ICollection<Tag> targetTags, IRepository<Tag> baseTags)
+        private IEnumerable<TagViewModel> GetTags(ICollection<Tag> targetTags)
         {
-            List<Tag> tags = baseTags.All().ToList();
-            List<TagViewModel> resultTags = new List<TagViewModel>();
+            IEnumerable<TagViewModel> tags = this.Context
+                                                 .Tags
+                                                 .Where(t => targetTags.Contains(t))
+                                                 .ToList()
+                                                 .Select(t => new TagViewModel
+                                                  {
+                                                      Name = t.Name,
+                                                      UrlSlug = t.UrlSlug
+                                                  });
 
-            foreach (var item in tags)
-            {
-                if (targetTags.Contains(item))
-                {
-                    resultTags.Add(new TagViewModel { Name = item.Name, UrlSlug = item.UrlSlug });
-                }
-            }
-
-            return resultTags;
+            return tags;
         }
 
-        private CategoryViewModel GetCategory(int categoryId, IRepository<Category> categories)
+        private CategoryViewModel GetCategory(int categoryId)
         {
-            Category category = categories.Find(categoryId);
+            Category category = this.Context.Categories.Find(categoryId);
             CategoryViewModel categoryVM = new CategoryViewModel { Name = category.Name, UrlSlug = category.UrlSlug };
 
             return categoryVM;

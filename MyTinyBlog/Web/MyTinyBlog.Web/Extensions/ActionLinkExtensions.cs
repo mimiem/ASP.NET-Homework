@@ -22,8 +22,7 @@
                 });
         }
 
-        public static MvcHtmlString CategoryLink(this HtmlHelper helper,
-            CategoryViewModel category)
+        public static MvcHtmlString CategoryLink(this HtmlHelper helper, CategoryViewModel category)
         {
             return helper.ActionLink(category.Name, "Category", "Blog",
                 new
