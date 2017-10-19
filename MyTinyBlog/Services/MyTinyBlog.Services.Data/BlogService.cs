@@ -7,13 +7,12 @@
     using System.Linq;
     using System;
 
-    public class BlogService
+    public class BlogService : Service
     {
         public ListViewModel GetList(int pageNo, IRepository<BlogPost> posts, IRepository<Category> categories, IRepository<Tag> tags)
         {
             // pick latest 10 posts
             List<BlogPost> postsNeeded = posts.All()
-                               .Where(p => p.IsDeleted == false)
                                .OrderByDescending(p => p.CreatedOn)
                                .Skip((pageNo - 1) * 10)
                                .Take(10)
@@ -46,7 +45,6 @@
         {
 
             List<BlogPost> postsNeeded = posts.All()
-                               .Where(p => p.IsDeleted == false && p.Category.UrlSlug == categorySlug)
                                .OrderByDescending(p => p.CreatedOn)
                                .Skip((pageNo - 1) * 10)
                                .Take(10)
@@ -90,7 +88,7 @@
 
         private CategoryViewModel GetCategory(int categoryId, IRepository<Category> categories)
         {
-            Category category = categories.GetById(categoryId);
+            Category category = categories.Find(categoryId);
             CategoryViewModel categoryVM = new CategoryViewModel { Name = category.Name, UrlSlug = category.UrlSlug };
 
             return categoryVM;

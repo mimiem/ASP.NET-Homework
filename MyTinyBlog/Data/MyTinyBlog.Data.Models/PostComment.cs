@@ -1,8 +1,8 @@
 ﻿namespace MyTinyBlog.Data.Models
 {
-    using MyTinyBlog.Data.Contracts;
+    using System;
 
-    public class PostComment : DeletableEntity
+    public class PostComment
     {
         public PostComment()
         {
@@ -12,6 +12,8 @@
         public int Id { get; set; }
 
         public string Content { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public int BlogPostId { get; set; }
 

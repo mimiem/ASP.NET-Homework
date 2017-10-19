@@ -1,10 +1,10 @@
 ﻿namespace MyTinyBlog.Data.Models
 {
-    using Contracts;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class BlogPost : DeletableEntity
+    public class BlogPost 
     {
         private ICollection<PostComment> comments;
         private ICollection<Tag> tags;
@@ -35,6 +35,8 @@
         /// The UrlSlug property is an alternate for the Title property to use in address.
         /// </summary>
         public string UrlSlug { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public int CategoryId { get; set; }
 

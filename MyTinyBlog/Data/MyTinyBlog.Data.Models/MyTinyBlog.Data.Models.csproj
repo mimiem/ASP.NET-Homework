@@ -68,12 +68,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MyTinyBlog.Data.Contracts\MyTinyBlog.Data.Contracts.csproj">
-      <Project>{925277f1-9236-4e1d-b654-408e9e57f42c}</Project>
-      <Name>MyTinyBlog.Data.Contracts</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

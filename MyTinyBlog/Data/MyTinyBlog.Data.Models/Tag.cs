@@ -1,5 +1,6 @@
 ﻿namespace MyTinyBlog.Data.Models
 {
+    using System;
     using System.Collections.Generic;
 
     public class Tag
@@ -21,6 +22,8 @@
         public string UrlSlug { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public virtual ICollection<BlogPost> BlogPosts
         {

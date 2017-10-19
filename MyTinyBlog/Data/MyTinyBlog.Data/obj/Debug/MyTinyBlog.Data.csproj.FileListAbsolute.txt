@@ -14,5 +14,3 @@ C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTinyBlog.Dat
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTinyBlog.Data\obj\Debug\MyTinyBlog.Data.csprojResolveAssemblyReference.cache
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTinyBlog.Data\obj\Debug\MyTinyBlog.Data.dll
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTinyBlog.Data\obj\Debug\MyTinyBlog.Data.pdb
-C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTinyBlog.Data\bin\Debug\MyTinyBlog.Data.Contracts.dll
-C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Data\MyTinyBlog.Data\bin\Debug\MyTinyBlog.Data.Contracts.pdb

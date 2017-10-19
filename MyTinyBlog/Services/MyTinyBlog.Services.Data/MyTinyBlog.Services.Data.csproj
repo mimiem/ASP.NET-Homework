@@ -51,12 +51,9 @@
   <ItemGroup>
     <Compile Include="BlogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\MyTinyBlog.Data.Contracts\MyTinyBlog.Data.Contracts.csproj">
-      <Project>{925277f1-9236-4e1d-b654-408e9e57f42c}</Project>
-      <Name>MyTinyBlog.Data.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Data\MyTinyBlog.Data.Models\MyTinyBlog.Data.Models.csproj">
       <Project>{d73e3e43-2c34-444c-9351-ee27613d0429}</Project>
       <Name>MyTinyBlog.Data.Models</Name>

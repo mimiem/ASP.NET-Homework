@@ -3,12 +3,10 @@ C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\MyTinyBlog.Services.Data.pdb
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\EntityFramework.dll
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\MyTinyBlog.Data.Contracts.dll
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\MyTinyBlog.Data.dll
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\MyTinyBlog.Data.Models.dll
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
-C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\MyTinyBlog.Data.Contracts.pdb
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\MyTinyBlog.Data.Models.pdb
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\MyTinyBlog.Data.pdb
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\EntityFramework.xml

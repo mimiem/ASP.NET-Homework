@@ -12,8 +12,6 @@ namespace MyTinyBlog.Web.App_Start
     using Ninject.Web.Common;
     using System.Data.Entity;
     using Data;
-    using Data.Contracts;
-    using Data.Repositories.Base;
  
     public static class NinjectWebCommon 
     {
@@ -67,9 +65,6 @@ namespace MyTinyBlog.Web.App_Start
         {
             kernel.Bind<DbContext>().To<ApplicationDbContext>();
 
-            kernel.Bind(typeof(IDeletableEntityRepository<>)).To(typeof(DeletableEntityRepository<>));
-
-            kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
         }        
     }
 }
