@@ -28,7 +28,7 @@
                 CreatedOn = p.CreatedOn,
                 UrlSlug = p.UrlSlug,
                 Category = this.GetCategory(p.CategoryId),
-                //Tags = this.GetTags(p.Tags)
+                Tags = this.GetTags(p.Tags)
             });
 
             int totalPosts = this.Context.Posts.Count();
@@ -60,7 +60,7 @@
                 CreatedOn = p.CreatedOn,
                 UrlSlug = p.UrlSlug,
                 Category = this.GetCategory(p.CategoryId),
-                //Tags = this.GetTags(p.Tags)
+                Tags = this.GetTags(p.Tags)
             });
 
             var listViewModel = new ListViewModel
@@ -76,8 +76,8 @@
         {
             IEnumerable<TagViewModel> tags = this.Context
                                                  .Tags
-                                                 .Where(t => targetTags.Contains(t))
                                                  .ToList()
+                                                 .Where(t => this.ContainsTag(targetTags, t))
                                                  .Select(t => new TagViewModel
                                                   {
                                                       Name = t.Name,
@@ -85,6 +85,19 @@
                                                   });
 
             return tags;
+        }
+
+        private bool ContainsTag(ICollection<Tag> targetTags, Tag t)
+        {
+            foreach (var tag in targetTags)
+            {
+                if(tag.Name == t.Name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private CategoryViewModel GetCategory(int categoryId)

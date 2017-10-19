@@ -24,6 +24,7 @@
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
+        [HttpGet]
         public ViewResult Posts(int p = 1)
         {
             ListViewModel listViewModel = this.service.GetList(p);
@@ -33,6 +34,7 @@
             return View("List", listViewModel);
         }
 
+        [HttpGet]
         public ViewResult Category(string category, int p = 1)
         {
             ListViewModel listViewModel = this.service.GetListPostsByCategory(category, p);
