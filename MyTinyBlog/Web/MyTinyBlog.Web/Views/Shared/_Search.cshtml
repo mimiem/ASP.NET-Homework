@@ -2,7 +2,7 @@
                 "Search",           // action
                 "Blog",             // controller
                 FormMethod.Get,     // method
-                new { id = "search-form" })) // html attributes
+                new { id = "search-form", @class = "sidebar" })) // html attributes
 {
     <p>
         @Html.TextBox("s")

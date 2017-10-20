@@ -1,6 +1,5 @@
 ﻿namespace MyTinyBlog.Services.Data
 {
-    using MyTinyBlog.Data.Contracts;
     using MyTinyBlog.Data.Models;
     using MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog;
     using System.Collections.Generic;
@@ -90,6 +89,60 @@
             };
 
             return postVM;
+        }
+
+        public WidgetViewModel CreateWidgetViewModel()
+        {
+            WidgetViewModel widget = new WidgetViewModel
+            {
+                Categories = this.GetAllCategories(),
+                Tags = this.GetAllTags(),
+                LatestPosts = this.GetAllPosts()
+            };
+
+            return widget;
+        }
+
+        private IEnumerable<BlogPostViewModel> GetAllPosts()
+        {
+            // pick latest 10 posts
+            IEnumerable<BlogPost> postsNeeded = this.Context
+                                             .Posts
+                                             .Where(p => p.Published)
+                                             .OrderByDescending(p => p.CreatedOn)
+                                             .Take(5)
+                                             .ToList();
+
+            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
+            {
+                Title = p.Title,
+                Content = p.Content,
+                ShortContent = p.ShortContent,
+                CreatedOn = p.CreatedOn,
+                UrlSlug = p.UrlSlug,
+                Category = this.GetCategory(p.CategoryId),
+                Tags = this.GetTags(p.Tags)
+            });
+
+            return postsVM;
+        }
+
+        private IEnumerable<TagViewModel> GetAllTags()
+        {
+            return this.Context.Tags.OrderBy(t => t.Name).ToList().Select(c => new TagViewModel
+            {
+                Name = c.Name,
+                UrlSlug = c.UrlSlug
+            });
+        }
+
+        private IEnumerable<CategoryViewModel> GetAllCategories()
+        {
+            return this.Context.Categories.OrderBy(p => p.Name).ToList().Select(c => new CategoryViewModel
+            {
+                Name = c.Name,
+                UrlSlug = c.UrlSlug
+            });
         }
 
         public ListViewModel PostForSearch(string text, int pageNo)

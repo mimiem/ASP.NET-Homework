@@ -1,11 +1,8 @@
 ﻿namespace MyTinyBlog.Web.Controllers
 {
-    using Data.Contracts;
-    using Data.Models;
     using MyTinyBlog.Web.ViewModels.Blog;
     using Services.Data;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -84,6 +81,14 @@
             //    throw new HttpException(401, "The post is not published");
 
             return View(post);
+        }
+
+        //[OutputCache]
+        [ChildActionOnly]
+        public PartialViewResult Sidebars()
+        {
+            WidgetViewModel widgetViewModel = this.service.CreateWidgetViewModel();
+            return PartialView("_Sidebars", widgetViewModel);
         }
     }
 }

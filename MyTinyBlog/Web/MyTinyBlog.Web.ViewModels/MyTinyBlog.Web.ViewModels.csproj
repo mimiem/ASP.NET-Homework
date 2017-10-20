@@ -126,6 +126,7 @@
     <Compile Include="Blog\CategoryViewModel.cs" />
     <Compile Include="Blog\ListViewModel.cs" />
     <Compile Include="Blog\TagViewModel.cs" />
+    <Compile Include="Blog\WidgetViewModel.cs" />
     <Compile Include="Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="Manage\ChangePasswordViewModel.cs" />
     <Compile Include="Manage\ConfigureTwoFactorViewModel.cs" />
