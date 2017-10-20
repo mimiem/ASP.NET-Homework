@@ -17,8 +17,21 @@ namespace MyTinyBlog.Web
 
             routes.MapRoute(
                 name: "Category",
-                url:"Category/{category}",
+                url: "Category/{category}",
                 defaults: new { controller = "Blog", action = "Category" }
+            );
+
+            routes.MapRoute(
+                name: "Tag",
+                url: "Tag/{tag}",
+                defaults: new { controller = "Blog", action = "Tag" }
+            );
+
+            routes.MapRoute(
+                name: "Post",
+                url: "Archive/{year}/{month}/{title}",
+                defaults: new { controller = "Blog", action = "Post" },
+                constraints: new { year = @"\d{4}", month = @"\d{2}", day = @"\d{2}" }
             );
         }
     }

@@ -48,5 +48,42 @@
             return View("List", listViewModel);
         }
 
+        [HttpGet]
+        public ViewResult Tag(string tag, int p = 1)
+        {
+            ListViewModel viewModel = this.service.GetListPostsByTag(tag, p);
+
+            //if (viewModel.Tag == null)
+            //    throw new HttpException(404, "Tag not found");
+
+            TagViewModel tagVM = this.service.GetTag(tag);
+
+            ViewBag.Title = String.Format(@"Latest posts tagged on ""{0}""",
+                tagVM.Name);
+            return View("List", viewModel);
+        }
+
+        public ViewResult Search(string text, int p = 1)
+        {
+            ViewBag.Title = String.Format(@"Lists of posts found
+                        for search text ""{0}""", text);
+
+            ListViewModel viewModel = this.service.PostForSearch(text, p);
+            return View("List", viewModel);
+        }
+
+        [HttpGet]
+        public ViewResult Post(int year, int month, string title)
+        {
+            BlogPostViewModel post = this.service.GetPost(year, month, title);
+
+            //if (post == null)
+            //    throw new HttpException(404, "Post not found");
+
+            //if (post.Published == false && User.Identity.IsAuthenticated == false)
+            //    throw new HttpException(401, "The post is not published");
+
+            return View(post);
+        }
     }
 }

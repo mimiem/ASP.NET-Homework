@@ -33,6 +33,7 @@
 
         <!-- Site Content -->
         <div id="site_content">
+            @Html.Partial("_Search")
             @RenderBody()
         </div>
 
@@ -53,5 +54,6 @@
             $(this).addClass('selected');
         });
     </script>
+    <script src="@Url.Content("~/Scripts/app.js")"></script>
 </body>
 </html>
