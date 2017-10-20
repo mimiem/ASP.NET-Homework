@@ -32,11 +32,9 @@
 
         <!-- Site Content -->
         <div id="site_content">
-            
-            @RenderBody()
-
             @* Call the child action to render the sidebar *@
             @Html.Action("Sidebars")
+            @RenderBody()
         </div>
 
         <!-- Footer -->
