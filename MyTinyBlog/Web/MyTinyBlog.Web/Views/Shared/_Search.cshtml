@@ -5,13 +5,9 @@
                             new { id = "search-form"})) // html attributes
 {
     <p>
-        @Html.TextBox("text")
+        @Html.TextBox("text", null, new { @class = "search", type = "text", name = "search_field", value = "Enter keywords..." })
     </p>
     <p>
-        <input name="search" type="submit" alt="Search" title="Search">
-    </p>
-    @*<p>
-        <input class="search" type="text" name="search_field" value="Enter keywords..."/>
         <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px" alt="Search" title="Search" src="~/Content/themes/simple/images/search.png">
-    </p>*@
+    </p>
 }

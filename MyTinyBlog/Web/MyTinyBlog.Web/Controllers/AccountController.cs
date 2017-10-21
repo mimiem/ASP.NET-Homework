@@ -9,6 +9,7 @@
     using Microsoft.Owin.Security;
     using MyTinyBlog.Web.ViewModels.Account;
     using Data.Models;
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -148,7 +149,12 @@
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -60,6 +60,7 @@ form
 { padding: 0; 
   margin: 0;}
 
+
 .left
 { float: left;
   margin-right: 10px;}
@@ -166,7 +167,7 @@ ul#menu li a
   padding: 9px 15px 5px 15px;
   text-align: center;
   color: #FFF;
-  border: none;} 
+  border: none;}
 
 ul#menu li.selected a
 { height: 20px;
@@ -211,36 +212,6 @@ ul#menu li a:hover
 
 .sidebar li a.selected
 { color: #444;} 
-
-.post .post-title
-{ display: inline-block; }
-  
-.post .post-category, .post-tags
-  { float: left; margin-right: 10px; }
-  
-.post .tags-div
-{ font-style: italic; display:inline; }
-
-.post .tags-div a
-{ margin-right: 5px; }
-
-.post .posted-date
-{ float: right; }
-
-.post .row
-{ clear: both; }
-
-.post .post-body
-{ margin-top: 25px; clear: both; }
-
-.post .post-foot
-{ float: right; }
-
-.pager
-{ margin-top:20px; clear: right; }
-
-.pager .next
-{ float: right; }
 
 #content
 { text-align: left;
@@ -294,10 +265,10 @@ ul#menu li a:hover
 .form_settings
 { margin: 15px 0 0 0;}
 
-.form_settings p
-{ padding: 0 0 4px 0;}
+.form_settings .form-group 
+{ padding: 0 0 10px 0;}
 
-.form_settings span
+.form_settings label
 { float: left; 
   width: 200px; 
   text-align: left;}
@@ -314,7 +285,7 @@ ul#menu li a:hover
 { font: 100% arial; 
   border: 0; 
   width: 99px; 
-  margin: 0 0 0 212px; 
+  margin: 0 0 0 410px; 
   height: 33px;
   padding: 2px 0 3px 0;
   cursor: pointer; 
@@ -334,6 +305,36 @@ ul#menu li a:hover
   width: 14px;
   border: 0;
   background: none;}
+
+.post .post-title
+{ display: inline-block; }
+  
+.post .post-category, .post-tags
+  { float: left; margin-right: 10px; }
+  
+.post .tags-div
+{ font-style: italic; display:inline; }
+
+.post .tags-div a
+{ margin-right: 5px; }
+
+.post .posted-date
+{ float: right; }
+
+.post .row
+{ clear: both; }
+
+.post .post-body
+{ margin-top: 25px; clear: both; }
+
+.post .post-foot
+{ float: right; }
+
+.pager
+{ margin-top:20px; clear: right; }
+
+.pager .next
+{ float: right; }
 
 .separator
 { width: 100%;
@@ -355,3 +356,5 @@ table tr td
 { background: #E5E5DB;
   color: #47433F;
   border-top: 1px solid #FFF;}
+
+

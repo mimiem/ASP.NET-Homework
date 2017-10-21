@@ -3,6 +3,7 @@
     using MyTinyBlog.Web.ViewModels.Blog;
     using Services.Data;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -24,31 +25,30 @@
         [HttpGet]
         public ViewResult Posts(int p = 1)
         {
-            ListViewModel listViewModel = this.service.GetList(p);
+            IEnumerable<BlogPostViewModel> latestPosts = this.service.GetLatestPosts(p);
 
             ViewBag.Title = "Latest Posts";
 
-            return View("List", listViewModel);
+            return View("List", latestPosts);
         }
 
         [HttpGet]
         public ViewResult Category(string category, int p = 1)
         {
-            ListViewModel listViewModel = this.service.GetListPostsByCategory(category, p);
-
+            IEnumerable<BlogPostViewModel> postsByCategory = this.service.GetPostsByCategory(category, p);
             //if (listViewModel.Posts.Count() <= 0)
             //    throw new HttpException(404, "Category not found");
 
             ViewBag.Title = String.Format(@"Latest posts on category ""{0}""",
-                                listViewModel.Posts.First().Category.Name);
+                                postsByCategory.First().Category.Name);
 
-            return View("List", listViewModel);
+            return View("List", postsByCategory);
         }
 
         [HttpGet]
         public ViewResult Tag(string tag, int p = 1)
         {
-            ListViewModel viewModel = this.service.GetListPostsByTag(tag, p);
+            IEnumerable<BlogPostViewModel> postsByTag = this.service.GetListPostsByTag(tag, p);
 
             //if (viewModel.Tag == null)
             //    throw new HttpException(404, "Tag not found");
@@ -57,7 +57,7 @@
 
             ViewBag.Title = String.Format(@"Latest posts tagged on ""{0}""",
                 tagVM.Name);
-            return View("List", viewModel);
+            return View("List", postsByTag);
         }
 
         public ViewResult Search(string text, int p = 1)
@@ -65,8 +65,8 @@
             ViewBag.Title = String.Format(@"Lists of posts found
                         for search text ""{0}""", text);
 
-            ListViewModel viewModel = this.service.PostForSearch(text, p);
-            return View("List", viewModel);
+            IEnumerable<BlogPostViewModel> seearchedPosts = this.service.PostForSearch(text, p);
+            return View("List", seearchedPosts);
         }
 
         [HttpGet]

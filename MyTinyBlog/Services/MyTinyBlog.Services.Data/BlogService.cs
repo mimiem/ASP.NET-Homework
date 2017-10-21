@@ -4,11 +4,11 @@
     using MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog;
     using System.Collections.Generic;
     using System.Linq;
-    using System;
+    using Contracts;
 
-    public class BlogService : Service
+    public class BlogService : Service, IBlogService
     {
-        public ListViewModel GetList(int pageNo)
+        public IEnumerable<BlogPostViewModel> GetLatestPosts(int pageNo)
         {
             // pick latest 10 posts
             IEnumerable<BlogPost> postsNeeded = this.Context
@@ -30,20 +30,11 @@
                 Tags = this.GetTags(p.Tags)
             });
 
-            int totalPosts = this.Context.Posts.Count();
-
-            var listViewModel = new ListViewModel
-            {
-                Posts = postsVM,
-                TotalPosts = totalPosts
-            };
-
-            return listViewModel;
+            return postsVM;
         }
 
-        public ListViewModel GetListPostsByCategory(string categorySlug, int pageNo)
+        public IEnumerable<BlogPostViewModel> GetPostsByCategory(string categorySlug, int pageNo)
         {
-
             IEnumerable<BlogPost> postsNeeded = this.Context.Posts
                                              .Where(p => p.Published && p.Category.UrlSlug == categorySlug)
                                              .OrderByDescending(p => p.CreatedOn)
@@ -62,13 +53,67 @@
                 Tags = this.GetTags(p.Tags)
             });
 
-            var listViewModel = new ListViewModel
+            return postsVM;
+        }
+
+        public IEnumerable<BlogPostViewModel> GetListPostsByTag(string tagSlug, int pageNo)
+        {
+            IEnumerable<BlogPost> postsNeeded = this.Context.Posts
+                                             .Where(p => p.Published && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
+                                             .OrderByDescending(p => p.CreatedOn)
+                                             .Skip((pageNo - 1) * 10)
+                                             .Take(10)
+                                             .ToList();
+
+            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
             {
-                Posts = postsVM,
-                TotalPosts = postsVM.Count()
+                Title = p.Title,
+                Content = p.Content,
+                ShortContent = p.ShortContent,
+                CreatedOn = p.CreatedOn,
+                UrlSlug = p.UrlSlug,
+                Category = this.GetCategory(p.CategoryId),
+                Tags = this.GetTags(p.Tags)
+            });
+
+            return postsVM;
+        }
+
+        public IEnumerable<BlogPostViewModel> PostForSearch(string text, int pageNo)
+        {
+            IEnumerable<BlogPost> postsNeeded = this.Context.Posts
+                                             .Where(p => p.Published && (p.Title.Contains(text)
+                                             || p.Category.Name.Equals(text)
+                                             || p.Tags.Any(t => t.Name.Equals(text))))
+                                             .OrderByDescending(p => p.CreatedOn)
+                                             .Skip((pageNo - 1) * 10)
+                                             .Take(10)
+                                             .ToList();
+
+            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
+            {
+                Title = p.Title,
+                Content = p.Content,
+                ShortContent = p.ShortContent,
+                CreatedOn = p.CreatedOn,
+                UrlSlug = p.UrlSlug,
+                Category = this.GetCategory(p.CategoryId),
+                Tags = this.GetTags(p.Tags)
+            });
+
+            return postsVM;
+        }
+
+        public TagViewModel GetTag(string tagSlug)
+        {
+            Tag tag = this.Context.Tags.FirstOrDefault(t => t.UrlSlug == tagSlug);
+            TagViewModel tagVM = new TagViewModel
+            {
+                Name = tag.Name,
+                UrlSlug = tag.UrlSlug
             };
 
-            return listViewModel;
+            return tagVM;
         }
 
         public BlogPostViewModel GetPost(int year, int month, string titleSlug)
@@ -143,77 +188,6 @@
                 Name = c.Name,
                 UrlSlug = c.UrlSlug
             });
-        }
-
-        public ListViewModel PostForSearch(string text, int pageNo)
-        {
-            IEnumerable<BlogPost> postsNeeded = this.Context.Posts
-                                             .Where(p => p.Published && (p.Title.Contains(text) 
-                                             || p.Category.Name.Equals(text) 
-                                             || p.Tags.Any(t => t.Name.Equals(text))))
-                                             .OrderByDescending(p => p.CreatedOn)
-                                             .Skip((pageNo - 1) * 10)
-                                             .Take(10)
-                                             .ToList();
-
-            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
-            {
-                Title = p.Title,
-                Content = p.Content,
-                ShortContent = p.ShortContent,
-                CreatedOn = p.CreatedOn,
-                UrlSlug = p.UrlSlug,
-                Category = this.GetCategory(p.CategoryId),
-                Tags = this.GetTags(p.Tags)
-            });
-
-            var listViewModel = new ListViewModel
-            {
-                Posts = postsVM,
-                TotalPosts = postsVM.Count()
-            };
-
-            return listViewModel;
-        }
-
-        public TagViewModel GetTag(string tagSlug)
-        {
-            Tag tag = this.Context.Tags.FirstOrDefault(t => t.UrlSlug == tagSlug);
-            TagViewModel tagVM = new TagViewModel
-            {
-                Name = tag.Name, UrlSlug = tag.UrlSlug
-            };
-
-            return tagVM;
-        }
-
-        public ListViewModel GetListPostsByTag(string tagSlug, int pageNo)
-        {
-            IEnumerable<BlogPost> postsNeeded = this.Context.Posts
-                                             .Where(p => p.Published && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
-                                             .OrderByDescending(p => p.CreatedOn)
-                                             .Skip((pageNo - 1) * 10)
-                                             .Take(10)
-                                             .ToList();
-
-            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
-            {
-                Title = p.Title,
-                Content = p.Content,
-                ShortContent = p.ShortContent,
-                CreatedOn = p.CreatedOn,
-                UrlSlug = p.UrlSlug,
-                Category = this.GetCategory(p.CategoryId),
-                Tags = this.GetTags(p.Tags)
-            });
-
-            var listViewModel = new ListViewModel
-            {
-                Posts = postsVM,
-                TotalPosts = postsVM.Count()
-            };
-
-            return listViewModel;
         }
 
         private IEnumerable<TagViewModel> GetTags(ICollection<Tag> targetTags)

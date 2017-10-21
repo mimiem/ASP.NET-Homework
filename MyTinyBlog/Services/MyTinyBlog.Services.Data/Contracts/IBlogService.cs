@@ -6,12 +6,12 @@
 
     public interface IBlogService
     {
-        ListViewModel GetList(int pageNo);
+        IEnumerable<BlogPostViewModel> GetLatestPosts(int pageNo);
 
-        ListViewModel GetListPostsByCategory(string categorySlug, int pageNo);
+        IEnumerable<BlogPostViewModel> GetPostsByCategory(string categorySlug, int pageNo);
 
-        IEnumerable<TagViewModel> GetTags(ICollection<Tag> targetTags);
+        IEnumerable<BlogPostViewModel> GetListPostsByTag(string tagSlug, int pageNo);
 
-        CategoryViewModel GetCategory(int categoryId);
+        BlogPostViewModel GetPost(int year, int month, string titleSlug);
     }
 }

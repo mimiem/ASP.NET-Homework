@@ -1,4 +1,4 @@
-﻿@model MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog.ListViewModel
+﻿@model IEnumerable<MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog.BlogPostViewModel>
 
 @* Read the current page and total pages *@
 
@@ -7,7 +7,7 @@
       ? int.Parse(ViewContext.RequestContext.HttpContext.Request["p"])
       : 1;
 
-    var totalPages = Math.Ceiling((double)Model.TotalPosts / 10);
+    var totalPages = Math.Ceiling((double)Model.Count() / 10);
 }
 
 @* Check do we need to display pagination links *@

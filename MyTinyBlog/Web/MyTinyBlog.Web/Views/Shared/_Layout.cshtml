@@ -26,6 +26,7 @@
                     <li class="selected">@Html.ActionLink("Posts", "Posts", "Blog")</li>
                     <li>@Html.ActionLink("Contact", "Contact")</li>
                     <li>@Html.ActionLink("About Me", "AboutMe")</li>
+                    <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
             </div>
         </div>
@@ -33,7 +34,7 @@
         <!-- Site Content -->
         <div id="site_content">
             @* Call the child action to render the sidebar *@
-            @Html.Action("Sidebars")
+            @Html.Action("Sidebars", "Blog")
             @RenderBody()
         </div>
 
