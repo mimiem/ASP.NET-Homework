@@ -101,5 +101,7 @@
             WidgetViewModel widgetViewModel = this.service.CreateWidgetViewModel();
             return PartialView("_Sidebars", widgetViewModel);
         }
+
+
     }
 }

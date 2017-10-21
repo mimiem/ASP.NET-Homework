@@ -7,6 +7,8 @@
         <th>Post title</th>
         <th>Created</th>
         <th>Details</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -24,6 +26,8 @@
                 },
                 new { title = "Go" })
             </td>
+            <td>Edit</td> @*TODO*@
+            <td>Delete</td> @*TODO*@
         </tr>
     }
 </table>
