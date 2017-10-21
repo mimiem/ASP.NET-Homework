@@ -1,5 +1,6 @@
 ﻿namespace MyTinyBlog.Web.Controllers
 {
+    using Microsoft.AspNet.Identity;
     using MyTinyBlog.Web.ViewModels.Blog;
     using Services.Data;
     using System;
@@ -81,6 +82,16 @@
             //    throw new HttpException(401, "The post is not published");
 
             return View(post);
+        }
+
+        [HttpGet]
+        public ViewResult MyPosts()
+        {
+            IEnumerable<BlogPostViewModel> posts = this.service.GetAllPosts();
+
+            ViewBag.Title = "My Posts";
+
+            return View("MyPosts", posts);
         }
 
         //[OutputCache]

@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Contracts;
+    using System;
 
     public class BlogService : Service, IBlogService
     {
@@ -63,6 +64,27 @@
                                              .OrderByDescending(p => p.CreatedOn)
                                              .Skip((pageNo - 1) * 10)
                                              .Take(10)
+                                             .ToList();
+
+            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
+            {
+                Title = p.Title,
+                Content = p.Content,
+                ShortContent = p.ShortContent,
+                CreatedOn = p.CreatedOn,
+                UrlSlug = p.UrlSlug,
+                Category = this.GetCategory(p.CategoryId),
+                Tags = this.GetTags(p.Tags)
+            });
+
+            return postsVM;
+        }
+
+        public IEnumerable<BlogPostViewModel> GetAllPosts()
+        {
+            IEnumerable<BlogPost> postsNeeded = this.Context.Posts
+                                             .Where(p => p.Published)
+                                             .OrderByDescending(p => p.CreatedOn)
                                              .ToList();
 
             var postsVM = postsNeeded.Select(p => new BlogPostViewModel
@@ -142,13 +164,13 @@
             {
                 Categories = this.GetAllCategories(),
                 Tags = this.GetAllTags(),
-                LatestPosts = this.GetAllPosts()
+                LatestPosts = this.GetSideBarPosts()
             };
 
             return widget;
         }
 
-        private IEnumerable<BlogPostViewModel> GetAllPosts()
+        private IEnumerable<BlogPostViewModel> GetSideBarPosts()
         {
             // pick latest 10 posts
             IEnumerable<BlogPost> postsNeeded = this.Context
