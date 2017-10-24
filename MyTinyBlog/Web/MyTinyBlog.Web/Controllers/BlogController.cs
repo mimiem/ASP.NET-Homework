@@ -84,15 +84,7 @@
             return View(post);
         }
 
-        [HttpGet]
-        public ViewResult MyPosts()
-        {
-            IEnumerable<BlogPostViewModel> posts = this.service.GetAllPosts();
-
-            ViewBag.Title = "My Posts";
-
-            return View("MyPosts", posts);
-        }
+        
 
         //[OutputCache]
         [ChildActionOnly]

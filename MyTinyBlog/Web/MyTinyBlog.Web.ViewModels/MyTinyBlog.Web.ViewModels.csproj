@@ -124,6 +124,7 @@
     <Compile Include="Account\VerifyCodeViewModel.cs" />
     <Compile Include="Blog\BlogPostViewModel.cs" />
     <Compile Include="Blog\CategoryViewModel.cs" />
+    <Compile Include="Blog\CreateNewPostViewModel.cs" />
     <Compile Include="Blog\TagViewModel.cs" />
     <Compile Include="Blog\WidgetViewModel.cs" />
     <Compile Include="Manage\AddPhoneNumberViewModel.cs" />

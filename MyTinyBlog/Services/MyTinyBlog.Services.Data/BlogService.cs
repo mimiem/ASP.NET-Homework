@@ -80,27 +80,6 @@
             return postsVM;
         }
 
-        public IEnumerable<BlogPostViewModel> GetAllPosts()
-        {
-            IEnumerable<BlogPost> postsNeeded = this.Context.Posts
-                                             .Where(p => p.Published)
-                                             .OrderByDescending(p => p.CreatedOn)
-                                             .ToList();
-
-            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
-            {
-                Title = p.Title,
-                Content = p.Content,
-                ShortContent = p.ShortContent,
-                CreatedOn = p.CreatedOn,
-                UrlSlug = p.UrlSlug,
-                Category = this.GetCategory(p.CategoryId),
-                Tags = this.GetTags(p.Tags)
-            });
-
-            return postsVM;
-        }
-
         public IEnumerable<BlogPostViewModel> PostForSearch(string text, int pageNo)
         {
             IEnumerable<BlogPost> postsNeeded = this.Context.Posts
@@ -212,40 +191,10 @@
             });
         }
 
-        private IEnumerable<TagViewModel> GetTags(ICollection<Tag> targetTags)
-        {
-            IEnumerable<TagViewModel> tags = this.Context
-                                                 .Tags
-                                                 .ToList()
-                                                 .Where(t => this.ContainsTag(targetTags, t))
-                                                 .Select(t => new TagViewModel
-                                                  {
-                                                      Name = t.Name,
-                                                      UrlSlug = t.UrlSlug
-                                                  });
+        
 
-            return tags;
-        }
+       
 
-        private bool ContainsTag(ICollection<Tag> targetTags, Tag t)
-        {
-            foreach (var tag in targetTags)
-            {
-                if(tag.Name == t.Name)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private CategoryViewModel GetCategory(int categoryId)
-        {
-            Category category = this.Context.Categories.Find(categoryId);
-            CategoryViewModel categoryVM = new CategoryViewModel { Name = category.Name, UrlSlug = category.UrlSlug };
-
-            return categoryVM;
-        }
+        
     }
 }

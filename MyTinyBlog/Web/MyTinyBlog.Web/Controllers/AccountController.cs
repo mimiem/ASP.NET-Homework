@@ -87,6 +87,7 @@
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+
         }
 
         //
@@ -395,7 +396,7 @@
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Posts", "Blog");
         }
 
         //

@@ -1,0 +1,40 @@
+﻿@using MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog
+@model CreateNewPostViewModel
+@{
+    ViewBag.Title = "Add Post";
+}
+
+<h2>@ViewBag.Title.</h2>
+<section id="createPostForm">
+    @using (Html.BeginForm("AddPost", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="form_settings">
+            @Html.AntiForgeryToken()
+            <h4>Create new post</h4>
+            <br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+                <div class="col-md-offset-2">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input class="submit" type="submit" value="Create" />
+                </div>
+            </div>
+        </div>
+
+    }
+</section>
+

@@ -33,6 +33,12 @@ namespace MyTinyBlog.Web
                 defaults: new { controller = "Blog", action = "Post" },
                 constraints: new { year = @"\d{4}", month = @"\d{2}", day = @"\d{2}" }
             );
+
+            routes.MapRoute(
+                name: "Manage",
+                url: "Manage",
+                defaults: new { controller = "Admin", action = "Manage" }
+            );
         }
     }
 }
