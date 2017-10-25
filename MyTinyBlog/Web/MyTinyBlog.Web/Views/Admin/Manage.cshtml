@@ -17,14 +17,14 @@
             <td>@Html.DisplayFor(model => item.CreatedOn)</td>
             <td>
                 @Html.ActionLink("Go", "post", "blog",
-                new
-                {
-                    year = item.CreatedOn.Year,
-                    month = item.CreatedOn.Month,
-                    day = item.CreatedOn.Day,
-                    title = item.UrlSlug
-                },
-                new { title = "Go" })
+            new
+            {
+                year = item.CreatedOn.Year,
+                month = item.CreatedOn.Month,
+                day = item.CreatedOn.Day,
+                title = item.UrlSlug
+            },
+            new { title = "Go" })
             </td>
             <td>@Html.ActionLink("Edit", "Edit", "Admin")</td> @*TODO*@
             <td>@Html.ActionLink("Delete", "Delete", "Admin")</td> @*TODO*@
@@ -36,5 +36,8 @@
         @Html.ActionLink("Add new Post", "AddPost", "Admin")
     </p>
 </div>
+
+
+
 
 

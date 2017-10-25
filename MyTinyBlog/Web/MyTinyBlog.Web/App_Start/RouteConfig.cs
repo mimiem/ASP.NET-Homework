@@ -39,6 +39,12 @@ namespace MyTinyBlog.Web
                 url: "Manage",
                 defaults: new { controller = "Admin", action = "Manage" }
             );
+
+            routes.MapRoute(
+                name: "LogOff",
+                url: "LogOff",
+                defaults: new { controller = "Account", action = "LogOff" }
+            );
         }
     }
 }

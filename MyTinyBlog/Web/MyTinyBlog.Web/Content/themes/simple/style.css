@@ -152,8 +152,7 @@ ul#menu
 
 ul#menu li
 { float: left;
-  margin: 5px 0 0 0;
-  padding: 0 0 0 0px;
+  /*padding: 0 0 0 0px;*/
   list-style: none;}
 
 ul#menu li a
@@ -173,8 +172,8 @@ ul#menu li.selected a
 { height: 20px;
   padding: 7px 15px 4px 15px;}
 
-ul#menu li.selected
-{ margin: 7px 0 0 0;}
+/*ul#menu li.selected
+{ margin: 7px 0 0 0;}*/
 
 ul#menu li.selected a, ul#menu li.selected a:hover
 { color: #00C6EF;}
@@ -327,8 +326,8 @@ ul#menu li a:hover
 .post .post-body
 { margin-top: 25px; clear: both; }
 
-.post .post-foot
-{ float: right; }
+.post .post-foot /**/
+{ float: left; }
 
 .pager
 { margin-top:20px; clear: right; }

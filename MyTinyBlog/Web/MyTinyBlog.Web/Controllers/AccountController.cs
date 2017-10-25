@@ -453,7 +453,7 @@
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Posts", "Blog");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
