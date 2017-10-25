@@ -281,15 +281,17 @@ ul#menu li a:hover
   color: #47433F;}
   
 .form_settings .submit
-{ font: 100% arial; 
-  border: 0; 
-  width: 99px; 
-  margin: 0 0 0 410px; 
-  height: 33px;
-  padding: 2px 0 3px 0;
-  cursor: pointer; 
-  background: #3B3B3B; 
-  color: #FFF;}
+{ 
+    font: 100% arial; 
+    border: 0; 
+    width: 99px; 
+    margin: 0 0 0 410px; 
+    height: 33px;
+    padding: 2px 0 3px 0;
+    cursor: pointer; 
+    background: #3B3B3B; 
+    color: #FFF;
+}
 
 .form_settings textarea, .form_settings select
 { font: 100% arial; 
@@ -304,6 +306,19 @@ ul#menu li a:hover
   width: 14px;
   border: 0;
   background: none;}
+
+#postDelete .form_settings input.submit
+{
+    font: 100% arial; 
+    border: 0; 
+    width: 99px; 
+    margin: 15px 0 10px 0; 
+    height: 33px;
+    padding: 2px 0 3px 0;
+    cursor: pointer; 
+    background: #3B3B3B; 
+    color: #FFF;
+}
 
 .post .post-title
 { display: inline-block; }

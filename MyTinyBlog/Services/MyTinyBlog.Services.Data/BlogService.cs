@@ -22,6 +22,7 @@
 
             var postsVM = postsNeeded.Select(p => new BlogPostViewModel
             {
+                Id = p.Id,
                 Title = p.Title,
                 Content = p.Content,
                 ShortContent = p.ShortContent,
@@ -45,6 +46,7 @@
 
             var postsVM = postsNeeded.Select(p => new BlogPostViewModel
             {
+                Id = p.Id,
                 Title = p.Title,
                 Content = p.Content,
                 ShortContent = p.ShortContent,
@@ -68,6 +70,7 @@
 
             var postsVM = postsNeeded.Select(p => new BlogPostViewModel
             {
+                Id = p.Id,
                 Title = p.Title,
                 Content = p.Content,
                 ShortContent = p.ShortContent,
@@ -93,6 +96,7 @@
 
             var postsVM = postsNeeded.Select(p => new BlogPostViewModel
             {
+                Id = p.Id,
                 Title = p.Title,
                 Content = p.Content,
                 ShortContent = p.ShortContent,
@@ -125,6 +129,7 @@
 
             BlogPostViewModel postVM = new BlogPostViewModel
             {
+                Id = searchedPost.Id,
                 Title = searchedPost.Title,
                 UrlSlug = searchedPost.UrlSlug,
                 Content = searchedPost.Content,

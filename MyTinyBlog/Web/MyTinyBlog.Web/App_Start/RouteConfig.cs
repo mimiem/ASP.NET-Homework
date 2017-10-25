@@ -41,6 +41,12 @@ namespace MyTinyBlog.Web
             );
 
             routes.MapRoute(
+                name: "Delete",
+                url: "Delete/{id}",
+                defaults: new { controller = "Admin", action = "Delete" }
+            );
+
+            routes.MapRoute(
                name: "Posts",
                url: "Posts",
                defaults: new { controller = "Blog", action = "Posts", p = 1 }

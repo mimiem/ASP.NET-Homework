@@ -17,6 +17,7 @@
 
             var postsVM = postsNeeded.Select(p => new BlogPostViewModel
             {
+                Id = p.Id,
                 Title = p.Title,
                 Content = p.Content,
                 ShortContent = p.ShortContent,
@@ -47,6 +48,13 @@
             this.Context.SaveChanges();
         }
 
+        public DeletePostViewModel GetPostForDelete(int? id)
+        {
+            BlogPost post = this.Context.Posts.Find(id);
+
+            return new DeletePostViewModel { Title = post.Title, CreatedOn = post.CreatedOn };
+        }
+
         private Category GetOrAssignNewCategory(string category)
         {
             if (this.Context.Categories.Any(c => c.Name == category))
@@ -65,6 +73,13 @@
             this.Context.SaveChanges();
 
             return newCategory;
+        }
+
+        public void RemovePost(int id)
+        {
+            var post = this.Context.Posts.Find(id);
+            this.Context.Posts.Remove(post);
+            this.Context.SaveChanges();
         }
 
         private ICollection<Tag> GetOrAssignNewTags(string tags)

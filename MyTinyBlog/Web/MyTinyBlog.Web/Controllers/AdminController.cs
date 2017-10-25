@@ -4,10 +4,9 @@
     using MyTinyBlog.Web.ViewModels.Blog;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
-    using System.Threading.Tasks;
+    using System.Net;
+
     [Authorize]
     public class AdminController : Controller
     {
@@ -54,10 +53,38 @@
             return View();
         }
 
-        public ViewResult Delete()
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
-            //to do
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            DeletePostViewModel post = this.service.GetPostForDelete(id);
+
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(post);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                this.service.RemovePost(id);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Delete");
+            }
+
+            return RedirectToAction("Manage");
         }
     }
 }
