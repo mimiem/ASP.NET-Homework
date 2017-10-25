@@ -28,5 +28,82 @@
 
             return postsVM;
         }
+
+        public void AddNewPost(CreateNewPostViewModel post)
+        {
+            BlogPost postToAdd = new BlogPost
+            {
+                Title = post.Title,
+                CreatedOn = DateTime.Now,
+                Content = post.Content,
+                ShortContent = post.ShortContent,
+                Published = true,
+                UrlSlug = "add_new_post",
+                Category = this.GetOrAssignNewCategory(post.Category),
+                Tags = this.GetOrAssignNewTags(post.Tags)
+            };
+
+            this.Context.Posts.Add(postToAdd);
+            this.Context.SaveChanges();
+        }
+
+        private Category GetOrAssignNewCategory(string category)
+        {
+            if (this.Context.Categories.Any(c => c.Name == category))
+            {
+                return this.Context.Categories.FirstOrDefault(c => c.Name == category);
+            }
+
+            Category newCategory = new Category
+            {
+                Name = category,
+                UrlSlug = "TODO",
+                Description = "TODO"
+            };
+
+            this.Context.Categories.Add(newCategory);
+            this.Context.SaveChanges();
+
+            return newCategory;
+        }
+
+        private ICollection<Tag> GetOrAssignNewTags(string tags)
+        {
+            ICollection<Tag> neededTags = new HashSet<Tag>();
+            var tagSplitted = tags.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); 
+
+            foreach (var tag in tagSplitted)
+            {
+                Tag currentTag;
+
+                if (this.CheckIfTagExist(tag))
+                {
+                    currentTag = this.GetTag(tag);
+                }
+                else
+                {
+                    currentTag = this.CreateNewTag(tag);
+                }
+
+                neededTags.Add(currentTag);
+            }
+
+            return neededTags;
+        }
+
+        private Tag CreateNewTag(string tag)
+        {
+            return new Tag { Name = tag, CreatedOn = DateTime.Now, Description = "TODO" }; // TODO for now here tags will be created
+        }
+
+        private Tag GetTag(string tag)
+        {
+            return this.Context.Tags.FirstOrDefault(t => t.Name == tag);
+        }
+
+        private bool CheckIfTagExist(string tag)
+        {
+            return this.Context.Tags.Any(t => t.Name == tag);
+        }
     }
 }

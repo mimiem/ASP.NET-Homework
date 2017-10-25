@@ -1,16 +1,19 @@
 ﻿namespace MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog
 {
-    using MyTinyBlog.Web.ViewModels.Blog;
-    using System.Collections.Generic;
+    using System.Web.Mvc;
 
     public class CreateNewPostViewModel
     {
         public string Title { get; set; }
 
+        [AllowHtml]
+        public string ShortContent { get; set; }
+
+        [AllowHtml]
         public string Content { get; set; }
 
-        public CategoryViewModel Category { get; set; }
+        public string Category { get; set; }
 
-        public IEnumerable<TagViewModel> Tags { get; set; }
+        public string Tags { get; set; }
     }
 }

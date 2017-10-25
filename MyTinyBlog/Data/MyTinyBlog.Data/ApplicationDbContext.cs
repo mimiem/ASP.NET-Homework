@@ -26,5 +26,9 @@
 
         public IDbSet<Tag> Tags { get; set; }
 
+        public int Commit { get; set; }
+
+
+
     }
 }

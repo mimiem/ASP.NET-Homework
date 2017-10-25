@@ -41,6 +41,12 @@ namespace MyTinyBlog.Web
             );
 
             routes.MapRoute(
+               name: "Posts",
+               url: "Posts",
+               defaults: new { controller = "Blog", action = "Posts", p = 1 }
+           );
+
+            routes.MapRoute(
                 name: "LogOff",
                 url: "LogOff",
                 defaults: new { controller = "Account", action = "LogOff" }

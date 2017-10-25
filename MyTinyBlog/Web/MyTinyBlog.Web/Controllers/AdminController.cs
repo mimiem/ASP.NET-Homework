@@ -7,7 +7,7 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
-
+    using System.Threading.Tasks;
     [Authorize]
     public class AdminController : Controller
     {
@@ -34,13 +34,18 @@
         }
 
         [HttpPost]
-        public ViewResult AddPost(BlogPostViewModel post)
+        public ActionResult AddPost(CreateNewPostViewModel post)
         {
             if (!ModelState.IsValid)
             {
-                //return View(post);
+                return View(post);
             }
-            return View();
+
+            this.service.AddNewPost(post);
+
+            var allPosts = this.service.GetAllPosts();
+
+            return RedirectToAction("Posts", "Blog");
         }
 
         public ViewResult Edit()
