@@ -48,6 +48,36 @@
             this.Context.SaveChanges();
         }
 
+        public void EditPost(EditPostViewModel post)
+        {
+
+            BlogPost postToEdit = this.Context.Posts.Find(post.Id);
+            postToEdit.Id = post.Id;
+            postToEdit.Title = post.Title;
+            postToEdit.ShortContent = post.ShortContent;
+            postToEdit.Content = post.Content;
+            postToEdit.Category = this.GetOrAssignNewCategory(post.Category);
+            postToEdit.Tags = this.GetOrAssignNewTags(post.Tags); // TODO fix to work when edit tags (add new tags to tags that exist)
+            postToEdit.Modified = DateTime.Now;
+
+            this.Context.SaveChanges();
+        }
+
+        public EditPostViewModel GetPostForEdit(int? id)
+        {
+            BlogPost post = this.Context.Posts.Find(id);
+
+            return new EditPostViewModel
+            {
+                Id = post.Id,
+                Content = post.Content,
+                ShortContent = post.ShortContent,
+                Title = post.Title,
+                Category = post.Category.Name,
+                Tags = String.Join(" ", post.Tags.Select(t => t.Name))
+            };
+        }
+
         public DeletePostViewModel GetPostForDelete(int? id)
         {
             BlogPost post = this.Context.Posts.Find(id);

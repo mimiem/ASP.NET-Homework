@@ -47,10 +47,28 @@
             return RedirectToAction("Posts", "Blog");
         }
 
-        public ViewResult Edit()
+        [HttpGet]
+        public ActionResult Edit(int? id)
         {
-            //to do
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            EditPostViewModel post = this.service.GetPostForEdit(id);
+            
+            return View(post);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditPostViewModel post)
+        {
+            if (ModelState.IsValid)
+            {
+                this.service.EditPost(post);
+                return RedirectToAction("Posts", "Blog");
+            }
+            return View(post);
         }
 
         [HttpGet]

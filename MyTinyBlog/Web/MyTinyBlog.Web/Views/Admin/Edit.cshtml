@@ -1,0 +1,67 @@
+﻿@using MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog
+@model EditPostViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@ViewBag.Title.</h2>
+<section id="createPostForm">
+    @using (Html.BeginForm("Edit", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="form_settings">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            <h4>Edit post</h4>
+            <br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ShortContent, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.ShortContent, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ShortContent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tags, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Tags, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Tags, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input class="submit" type="submit" value="Edit" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.ActionLink("Back to Manage", "Manage")
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+
+
