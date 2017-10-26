@@ -39,7 +39,7 @@
                 Content = post.Content,
                 ShortContent = post.ShortContent,
                 Published = true,
-                UrlSlug = "add_new_post",
+                UrlSlug = post.Title.ToLower().Replace(' ','_'), 
                 Category = this.GetOrAssignNewCategory(post.Category),
                 Tags = this.GetOrAssignNewTags(post.Tags)
             };
@@ -57,8 +57,18 @@
             postToEdit.ShortContent = post.ShortContent;
             postToEdit.Content = post.Content;
             postToEdit.Category = this.GetOrAssignNewCategory(post.Category);
-            postToEdit.Tags = this.GetOrAssignNewTags(post.Tags); // TODO fix to work when edit tags (add new tags to tags that exist)
             postToEdit.Modified = DateTime.Now;
+
+            var tags = post.Tags.Split(' ');
+
+            foreach (var tag in tags)
+            {
+                if (!this.CheckIfTagExist(tag))
+                {
+                    Tag tagToAdd = this.CreateNewTag(tag);
+                    postToEdit.Tags.Add(tagToAdd);
+                }
+            }
 
             this.Context.SaveChanges();
         }
@@ -138,7 +148,7 @@
 
         private Tag CreateNewTag(string tag)
         {
-            return new Tag { Name = tag, CreatedOn = DateTime.Now, Description = "TODO" }; // TODO for now here tags will be created
+            return new Tag { Name = tag, CreatedOn = DateTime.Now, Description = "TODO", UrlSlug = tag.ToLower() }; // TODO for now here tags will be created
         }
 
         private Tag GetTag(string tag)
