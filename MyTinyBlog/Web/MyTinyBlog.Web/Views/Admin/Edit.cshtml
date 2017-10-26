@@ -23,14 +23,14 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ShortContent, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class="col-md-10" style="margin-left:130px">
                     @Html.TextAreaFor(m => m.ShortContent, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.ShortContent, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class="col-md-10" style="margin-left:130px">
                     @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
                 </div>

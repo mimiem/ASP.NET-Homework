@@ -185,14 +185,20 @@ ul#menu li a:hover
 { width: 858px;
   overflow: hidden;
   margin: 0 auto 0 auto;
-  padding: 10px 20px 20px 20px;
+  padding: 10px 20px 40px 20px; /*10px 20px 20px 20px;*/
   background: #F6F6F0 url(images/back.png) repeat-y;
   border: 15px solid #FFF;} 
 
+#sidebars
+{ 
+    float: right; 
+}
+
 .sidebar
-{ float: right;
+{ 
   width: 190px;
-  padding: 0 15px 20px 15px;}
+  padding: 0 15px 20px 15px;
+}
 
 .sidebar ul
 { width: 178px; 
@@ -213,9 +219,12 @@ ul#menu li a:hover
 { color: #444;} 
 
 #content
-{ text-align: left;
-  width: 613px;
-  padding: 0;}
+{ 
+    text-align: left;
+    width: 613px;
+    padding: 0;
+    float: left;
+}
 
 #content ul
 { margin: 2px 0 22px 0px;}
@@ -294,8 +303,10 @@ ul#menu li a:hover
 }
 
 .form_settings textarea, .form_settings select
-{ font: 100% arial; 
-  width: 299px;}
+{ 
+    font: 100% arial; 
+    width: 299px;
+}
 
 .form_settings select
 { width: 310px;}
