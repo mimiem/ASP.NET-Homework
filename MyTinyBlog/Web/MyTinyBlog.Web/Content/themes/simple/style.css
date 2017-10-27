@@ -382,4 +382,7 @@ table tr td
   color: #47433F;
   border-top: 1px solid #FFF;}
 
-
+span.field-validation-error
+{ 
+    color: red !important; 
+}
