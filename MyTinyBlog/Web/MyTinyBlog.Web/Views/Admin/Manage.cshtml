@@ -1,6 +1,18 @@
 ﻿@using MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog
-@model IEnumerable<BlogPostViewModel>
+@model ManageViewModel
 <h2>Manage</h2>
+
+<div>
+    <p>
+        @Html.ActionLink("Create new Post", "AddPost", "Admin")
+    </p>
+</div>
+
+<div>
+    <p>
+        @Html.ActionLink("Create new Category", "AddCategory", "Admin")
+    </p>
+</div>
 
 <table>
     <tr>
@@ -10,7 +22,7 @@
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Posts)
     {
         <tr>
             <td>@Html.DisplayFor(model => item.Title)</td>
@@ -26,16 +38,29 @@
             },
             new { title = "Go" })
             </td>
-            <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
-            <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</td> 
+            <td>@Html.ActionLink("Edit", "EditPost", new { id = item.Id })</td>
+            <td>@Html.ActionLink("Delete", "DeletePost", new { id = item.Id })</td> 
         </tr>
     }
 </table>
-<div>
-    <p>
-        @Html.ActionLink("Add new Post", "AddPost", "Admin")
-    </p>
-</div>
+
+<table>
+    <tr>
+        <th>Category name</th>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var item in Model.Categories)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => item.Name)</td>
+            <td>@Html.DisplayFor(model => item.Description)</td>
+            <td>@Html.ActionLink("Edit", "EditCategory", new { id = item.Id })</td>
+            <td>@Html.ActionLink("Delete", "DeleteCategory", new { id = item.Id })</td>
+        </tr>
+    }
+</table>
 
 
 

@@ -8,7 +8,7 @@ namespace MyTinyBlog.Data.Migrations
         {
             this.AutomaticMigrationsEnabled = true;
             // remove after
-            this.AutomaticMigrationDataLossAllowed = true;
+            //this.AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ApplicationDbContext context)

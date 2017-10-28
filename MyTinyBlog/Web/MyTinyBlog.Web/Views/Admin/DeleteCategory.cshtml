@@ -1,26 +1,26 @@
 ﻿@using MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog
-@model DeletePostViewModel
+@model CategoryViewModel
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete category";
 }
 
-<h2>Delete</h2>
+<h2>Delete category</h2>
 
 <h3>Are you sure you want to delete this?</h3>
-<div class="row" id="postDelete">
+<div class="row" id="categoryDelete">
     <div class="form_settings">
-        
+
         <div>
             <span>
-                @Html.DisplayNameFor(model => model.Title) :
-                @Html.DisplayFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Name) :
+                @Html.DisplayFor(model => model.Name)
             </span>
         </div>
         <div>
             <span>
-                @Html.DisplayNameFor(model => model.CreatedOn) :
-                @Html.DisplayFor(model => model.CreatedOn)
+                @Html.DisplayNameFor(model => model.Description) :
+                @Html.DisplayFor(model => model.Description)
             </span>
         </div>
         @using (Html.BeginForm())
@@ -39,3 +39,4 @@
         }
     </div>
 </div>
+

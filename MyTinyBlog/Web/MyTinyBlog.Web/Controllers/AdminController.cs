@@ -22,8 +22,14 @@
         {
             ViewBag.Title = "My Posts";
             IEnumerable<BlogPostViewModel> posts = this.service.GetAllPosts();
+            IEnumerable<CategoryViewModel> categories = this.service.GetAllCategories();
+            ManageViewModel model = new ManageViewModel
+            {
+                Posts = posts,
+                Categories = categories
+            };
 
-            return View(posts);
+            return View(model);
         }
 
         [HttpGet]
@@ -48,7 +54,7 @@
         }
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult EditPost(int? id)
         {
             if (id == null)
             {
@@ -61,7 +67,7 @@
         }
 
         [HttpPost]
-        public ActionResult Edit(EditPostViewModel post)
+        public ActionResult EditPost(EditPostViewModel post)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +78,7 @@
         }
 
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public ActionResult DeletePost(int? id)
         {
             if (id == null)
             {
@@ -89,9 +95,9 @@
             return View(post);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeletePost")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeletePostConfirmed(int id)
         {
             try
             {
@@ -99,7 +105,95 @@
             }
             catch (Exception)
             {
-                return RedirectToAction("Delete");
+                return RedirectToAction("DeletePost");
+            }
+
+            return RedirectToAction("Manage");
+        }
+
+        [HttpGet]
+        public ViewResult AddCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddCategory(CategoryViewModel category)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(category);
+            }
+
+            this.service.AddNewCategory(category);
+
+            var allPosts = this.service.GetAllPosts();
+
+            return RedirectToAction("Manage");
+        }
+
+        [HttpGet]
+        public ActionResult EditCategory(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            CategoryViewModel post = this.service.GetCategory(id);
+
+            return View(post);
+        }
+
+        [HttpPost]
+        public ActionResult EditCategory(CategoryViewModel category)
+        {
+            if (ModelState.IsValid)
+            {
+                this.service.EditCategory(category);
+                return RedirectToAction("Manage");
+            }
+            return View(category);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCategory(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            CategoryViewModel category = this.service.GetCategory(id);
+
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(category);
+        } 
+
+        [HttpPost, ActionName("DeleteCategory")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCategoryConfirmed(int id)
+        {
+            try
+            {
+                if (this.service.PostWithSuchCategory(id))
+                {
+                    CategoryViewModel category = this.service.GetCategory(id);
+
+                    return View("Decline", category);
+                }
+                else
+                {
+                    this.service.RemoveCategory(id);
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("DeleteCategory");
             }
 
             return RedirectToAction("Manage");

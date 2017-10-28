@@ -4,7 +4,7 @@
     ViewBag.Title = "Add Post";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <section id="createPostForm">
     @using (Html.BeginForm("AddPost", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
@@ -58,3 +58,6 @@
     }
 </section>
 
+<div>
+    @Html.ActionLink("Back to Manage", "Manage")
+</div>

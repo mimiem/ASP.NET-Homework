@@ -15,13 +15,13 @@
 
         protected ApplicationDbContext Context { get; }
 
-        protected CategoryViewModel GetCategory(int categoryId)
+        public CategoryViewModel GetCategory(int? categoryId)
         {
             Category category = this.Context.Categories.Find(categoryId);
             CategoryViewModel categoryVM = new CategoryViewModel { Name = category.Name, UrlSlug = category.UrlSlug };
 
             return categoryVM;
-        }
+        } //
 
         protected IEnumerable<TagViewModel> GetTags(ICollection<Tag> targetTags)
         {

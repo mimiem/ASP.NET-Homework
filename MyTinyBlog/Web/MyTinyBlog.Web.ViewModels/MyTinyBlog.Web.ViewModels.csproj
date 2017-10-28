@@ -127,6 +127,7 @@
     <Compile Include="Blog\CreateNewPostViewModel.cs" />
     <Compile Include="Blog\DeletePostViewModel.cs" />
     <Compile Include="Blog\EditPostViewModel.cs" />
+    <Compile Include="Blog\ManageViewModel.cs" />
     <Compile Include="Blog\TagViewModel.cs" />
     <Compile Include="Blog\WidgetViewModel.cs" />
     <Compile Include="Manage\AddPhoneNumberViewModel.cs" />

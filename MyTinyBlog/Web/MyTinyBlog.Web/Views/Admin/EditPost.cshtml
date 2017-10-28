@@ -1,12 +1,12 @@
 ﻿@using MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog
 @model EditPostViewModel
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit post";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <section id="createPostForm">
-    @using (Html.BeginForm("Edit", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("EditPost", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         <div class="form_settings">
             @Html.AntiForgeryToken()
@@ -51,7 +51,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input class="submit" type="submit" value="Edit" />
+                    <input class="submit" type="submit" value="Save" />
                 </div>
             </div>
             <div class="form-group">

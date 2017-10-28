@@ -30,6 +30,22 @@
             return postsVM;
         }
 
+        public IEnumerable<CategoryViewModel> GetAllCategories()
+        {
+            IEnumerable<CategoryViewModel> categories = this.Context
+                                                            .Categories
+                                                            .Select(c => new CategoryViewModel
+                                                                {
+                                                                    Id = c.Id,
+                                                                    Name = c.Name,
+                                                                    UrlSlug = c.UrlSlug,
+                                                                    Description = c.Description
+                                                                })
+                                                            .ToList();
+
+            return categories;
+        }
+
         public void AddNewPost(CreateNewPostViewModel post)
         {
             BlogPost postToAdd = new BlogPost
@@ -45,6 +61,19 @@
             };
 
             this.Context.Posts.Add(postToAdd);
+            this.Context.SaveChanges();
+        }
+
+        public void AddNewCategory(CategoryViewModel category)
+        {
+            Category categoryToAdd = new Category
+            {
+                Name = category.Name,
+                UrlSlug = category.UrlSlug,
+                Description = category.Description
+            };
+
+            this.Context.Categories.Add(categoryToAdd);
             this.Context.SaveChanges();
         }
 
@@ -88,11 +117,34 @@
             };
         }
 
+        public void EditCategory(CategoryViewModel category)
+        {
+            Category categoryToEdit = this.Context.Categories.Find(category.Id);
+
+            categoryToEdit.Name = category.Name;
+            categoryToEdit.UrlSlug = category.UrlSlug;
+            categoryToEdit.Description = category.Description;
+
+            this.Context.SaveChanges();
+        }
+
         public DeletePostViewModel GetPostForDelete(int? id)
         {
             BlogPost post = this.Context.Posts.Find(id);
 
             return new DeletePostViewModel { Title = post.Title, CreatedOn = post.CreatedOn };
+        }
+
+        public bool PostWithSuchCategory(int id)
+        {
+            return this.Context.Posts.Any(p => p.CategoryId == id);
+        }
+
+        public void RemoveCategory(int id)
+        {
+            Category category = this.Context.Categories.Find(id);
+            this.Context.Categories.Remove(category);
+            this.Context.SaveChanges();
         }
 
         private Category GetOrAssignNewCategory(string category)
