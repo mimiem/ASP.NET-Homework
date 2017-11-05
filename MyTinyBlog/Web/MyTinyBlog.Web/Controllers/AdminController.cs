@@ -23,10 +23,13 @@
             ViewBag.Title = "My Posts";
             IEnumerable<BlogPostViewModel> posts = this.service.GetAllPosts();
             IEnumerable<CategoryViewModel> categories = this.service.GetAllCategories();
+            IEnumerable<TagViewModel> tags = this.service.GetAllTags();
+
             ManageViewModel model = new ManageViewModel
             {
                 Posts = posts,
-                Categories = categories
+                Categories = categories,
+                Tags = tags
             };
 
             return View(model);
@@ -47,8 +50,6 @@
             }
 
             this.service.AddNewPost(post);
-
-            var allPosts = this.service.GetAllPosts();
 
             return RedirectToAction("Posts", "Blog");
         }
@@ -127,8 +128,6 @@
 
             this.service.AddNewCategory(category);
 
-            var allPosts = this.service.GetAllPosts();
-
             return RedirectToAction("Manage");
         }
 
@@ -194,6 +193,93 @@
             catch (Exception)
             {
                 return RedirectToAction("DeleteCategory");
+            }
+
+            return RedirectToAction("Manage");
+        }
+
+        [HttpGet]
+        public ViewResult AddTag()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddTag(TagViewModel tag)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(tag);
+            }
+
+            this.service.AddNewTag(tag);
+
+            return RedirectToAction("Manage");
+        }
+
+        [HttpGet]
+        public ActionResult EditTag(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            TagViewModel tag = this.service.GetTag(id);
+
+            return View(tag);
+        }
+
+        [HttpPost]
+        public ActionResult EditTag(TagViewModel tag)
+        {
+            if (ModelState.IsValid)
+            {
+                this.service.EditTag(tag);
+
+                return RedirectToAction("Manage");
+            }
+            return View(tag);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteTag(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            TagViewModel tag = this.service.GetTag(id);
+
+            if (tag == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(tag);
+        }
+
+        [HttpPost, ActionName("DeleteTag")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteTagConfirmed(int id)
+        {
+            try
+            {
+                if (this.service.PostWithSuchTag(id))
+                {
+                    TagViewModel tag = this.service.GetTag(id);
+
+                    return View("DeclineDeleteTag", tag);
+                }
+                else
+                {
+                    this.service.RemoveTag(id);
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("DeleteTag");
             }
 
             return RedirectToAction("Manage");

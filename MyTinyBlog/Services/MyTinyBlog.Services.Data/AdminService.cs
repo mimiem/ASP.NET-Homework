@@ -33,6 +33,23 @@
             return postsVM;
         }
 
+        public IEnumerable<TagViewModel> GetAllTags()
+        {
+            IEnumerable<Tag> tagsNeeded = this.Context.Tags
+                                                      .OrderBy(t => t.Name)
+                                                      .ToList();
+
+            IEnumerable<TagViewModel> tagsVM = tagsNeeded.Select(t => new TagViewModel
+            {
+                Id = t.Id,
+                Name = t.Name,
+                Description = t.Description,
+                UrlSlug = t.UrlSlug
+            });
+
+            return tagsVM;
+        }
+
         public IEnumerable<IdentityRole> GetAllRoles()
         {
             return this.Context.Roles.ToList();
@@ -149,6 +166,12 @@
             this.Context.SaveChanges();
         }
 
+        public void AddNewTag(TagViewModel tag)
+        {
+            this.Context.Tags.Add(new Tag { Name = tag.Name, UrlSlug = tag.UrlSlug, Description = tag.Description });
+            this.Context.SaveChanges();
+        }
+
         public EditPostViewModel GetPostForEdit(int? id)
         {
             BlogPost post = this.Context.Posts.Find(id);
@@ -164,6 +187,24 @@
             };
         }
 
+        public void EditTag(TagViewModel tag)
+        {
+            Tag tagToEdit = this.Context.Tags.Find(tag.Id);
+
+            tagToEdit.Name = tag.Name;
+            tagToEdit.UrlSlug = tag.UrlSlug;
+            tagToEdit.Description = tag.Description;
+
+            this.Context.SaveChanges();
+        }
+
+        public TagViewModel GetTag(int? id)
+        {
+            Tag tag = this.Context.Tags.Find(id);
+
+            return new TagViewModel { Name = tag.Name, UrlSlug = tag.UrlSlug, Description = tag.Description };
+        }
+
         public void EditCategory(CategoryViewModel category)
         {
             Category categoryToEdit = this.Context.Categories.Find(category.Id);
@@ -173,6 +214,18 @@
             categoryToEdit.Description = category.Description;
 
             this.Context.SaveChanges();
+        }
+
+        public void RemoveTag(int id)
+        {
+            Tag tag = this.Context.Tags.Find(id);
+            this.Context.Tags.Remove(tag);
+            this.Context.SaveChanges();
+        }
+
+        public bool PostWithSuchTag(int id)
+        {
+            return this.Context.Tags.Any(t => t.Id == id);
         }
 
         public DeletePostViewModel GetPostForDelete(int? id)

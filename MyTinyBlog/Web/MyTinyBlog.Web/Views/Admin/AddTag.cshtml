@@ -1,13 +1,13 @@
-﻿@model MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog.CategoryViewModel
+﻿@model MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog.TagViewModel
 
 <h2>Add Category</h2>
-<section id="createCategoryForm">
-    @using (Html.BeginForm("AddCategory", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+<section id="createTagForm">
+    @using (Html.BeginForm("AddTag", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form_settings">
-            <h4>Create new Category</h4>
+            <h4>Create new Tag</h4>
             <br />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -46,3 +46,5 @@
 <div>
     @Html.ActionLink("Back to Manage", "Manage")
 </div>
+
+

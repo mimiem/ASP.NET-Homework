@@ -68,6 +68,24 @@
     }
 </table>
 
+<table>
+    <tr>
+        <th>Tag name</th>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var item in Model.Tags)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => item.Name)</td>
+            <td>@Html.DisplayFor(model => item.Description)</td>
+            <td>@Html.ActionLink("Edit", "EditTag", new { id = item.Id })</td>
+            <td>@Html.ActionLink("Delete", "DeleteTag", new { id = item.Id })</td>
+        </tr>
+    }
+</table>
+
 
 
 

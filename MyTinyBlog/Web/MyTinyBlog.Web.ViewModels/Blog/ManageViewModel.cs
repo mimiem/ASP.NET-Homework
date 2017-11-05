@@ -7,5 +7,7 @@
         public IEnumerable<BlogPostViewModel> Posts { get; set; }
 
         public IEnumerable<CategoryViewModel> Categories { get; set; }
+
+        public IEnumerable<TagViewModel> Tags { get; set; }
     }
 }
