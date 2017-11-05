@@ -7,7 +7,7 @@
     using System.Web.Mvc;
     using System.Net;
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly AdminService service;

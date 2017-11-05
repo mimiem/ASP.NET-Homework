@@ -4,7 +4,11 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
     {
         @Html.AntiForgeryToken()
-        <li>@Html.ActionLink("Manage", "Manage", "Admin")</li>
+
+        if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Manage", "Manage", "Admin")</li>
+        }
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     }
 }

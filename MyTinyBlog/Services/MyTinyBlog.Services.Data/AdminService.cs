@@ -1,9 +1,12 @@
 ﻿namespace MyTinyBlog.Services.Data
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using MyTinyBlog.Data.Models;
     using MyTinyBlog.Web.MyTinyBlog.Web.ViewModels.Blog;
     using System;
+    using System.Web.Mvc;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
 
     public class AdminService : Service
@@ -28,6 +31,50 @@
             });
 
             return postsVM;
+        }
+
+        public IEnumerable<IdentityRole> GetAllRoles()
+        {
+            return this.Context.Roles.ToList();
+        }
+
+        public void CreateRole(string v)
+        {
+            this.Context.Roles.Add(new IdentityRole()
+            {
+                Name = v
+            });
+
+            this.Context.SaveChanges();
+        }
+
+        public IdentityRole GetRole(string roleName)
+        {
+            return this.Context.Roles.Where(r => r.Name.Equals(roleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+        }
+
+        public void DeleteRole(string roleName)
+        {
+            var thisRole = this.Context.Roles.Where(r => r.Name.Equals(roleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            this.Context.Roles.Remove(thisRole);
+            this.Context.SaveChanges();
+        }
+
+        public void EditRole(IdentityRole role)
+        {
+            this.Context.Entry(role).State = EntityState.Modified;
+            this.Context.SaveChanges();
+        }
+
+        public IEnumerable<SelectListItem> GetRolesForDropDown()
+        {
+            return this.Context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+        }
+
+        public ApplicationUser AddRoleToUser(string userName)
+        {
+            ApplicationUser user = this.Context.Users.Where(u => u.UserName.Equals(userName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            return user;
         }
 
         public IEnumerable<CategoryViewModel> GetAllCategories()
@@ -201,12 +248,12 @@
         private Tag CreateNewTag(string tag)
         {
             return new Tag { Name = tag, CreatedOn = DateTime.Now, Description = "TODO", UrlSlug = tag.ToLower() }; // TODO for now here tags will be created
-        }
+        }//
 
         private Tag GetTag(string tag)
         {
             return this.Context.Tags.FirstOrDefault(t => t.Name == tag);
-        }
+        }//
 
         private bool CheckIfTagExist(string tag)
         {

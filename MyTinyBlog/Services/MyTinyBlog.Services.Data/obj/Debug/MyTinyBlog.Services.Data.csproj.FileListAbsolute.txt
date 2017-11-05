@@ -32,3 +32,5 @@ C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\System.Web.WebPages.xml
 C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\System.Web.Helpers.dll
+C:\Users\User1\Documents\GitHub\ASP.NET-Homeworks\MyTinyBlog\Services\MyTinyBlog.Services.Data\bin\Debug\System.Web.Helpers.xml
