@@ -11,45 +11,7 @@
 
     public class AdminService : Service
     {
-        public IEnumerable<BlogPostViewModel> GetAllPosts()
-        {
-            IEnumerable<BlogPost> postsNeeded = this.Context.Posts
-                                             .Where(p => p.Published)
-                                             .OrderByDescending(p => p.CreatedOn)
-                                             .ToList();
-
-            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Content = p.Content,
-                ShortContent = p.ShortContent,
-                CreatedOn = p.CreatedOn,
-                UrlSlug = p.UrlSlug,
-                Category = this.GetCategory(p.CategoryId),
-                Tags = this.GetTags(p.Tags)
-            });
-
-            return postsVM;
-        }
-
-        public IEnumerable<TagViewModel> GetAllTags()
-        {
-            IEnumerable<Tag> tagsNeeded = this.Context.Tags
-                                                      .OrderBy(t => t.Name)
-                                                      .ToList();
-
-            IEnumerable<TagViewModel> tagsVM = tagsNeeded.Select(t => new TagViewModel
-            {
-                Id = t.Id,
-                Name = t.Name,
-                Description = t.Description,
-                UrlSlug = t.UrlSlug
-            });
-
-            return tagsVM;
-        }
-
+        //Roles
         public IEnumerable<IdentityRole> GetAllRoles()
         {
             return this.Context.Roles.ToList();
@@ -94,20 +56,27 @@
             return user;
         }
 
-        public IEnumerable<CategoryViewModel> GetAllCategories()
+        //Posts
+        public IEnumerable<BlogPostViewModel> GetAllPosts()
         {
-            IEnumerable<CategoryViewModel> categories = this.Context
-                                                            .Categories
-                                                            .Select(c => new CategoryViewModel
-                                                                {
-                                                                    Id = c.Id,
-                                                                    Name = c.Name,
-                                                                    UrlSlug = c.UrlSlug,
-                                                                    Description = c.Description
-                                                                })
-                                                            .ToList();
+            IEnumerable<BlogPost> postsNeeded = this.Context.Posts
+                                             .Where(p => p.Published)
+                                             .OrderByDescending(p => p.CreatedOn)
+                                             .ToList();
 
-            return categories;
+            var postsVM = postsNeeded.Select(p => new BlogPostViewModel
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Content = p.Content,
+                ShortContent = p.ShortContent,
+                CreatedOn = p.CreatedOn,
+                UrlSlug = p.UrlSlug,
+                Category = this.GetCategory(p.CategoryId),
+                Tags = this.GetTags(p.Tags)
+            });
+
+            return postsVM;
         }
 
         public void AddNewPost(CreateNewPostViewModel post)
@@ -119,56 +88,12 @@
                 Content = post.Content,
                 ShortContent = post.ShortContent,
                 Published = true,
-                UrlSlug = post.Title.ToLower().Replace(' ','_'), 
-                Category = this.GetOrAssignNewCategory(post.Category),
+                UrlSlug = post.Title.ToLower().Replace(' ', '_'),
+                Category = this.Context.Categories.FirstOrDefault(c => c.Name == post.Category),
                 Tags = this.GetOrAssignNewTags(post.Tags)
             };
 
             this.Context.Posts.Add(postToAdd);
-            this.Context.SaveChanges();
-        }
-
-        public void AddNewCategory(CategoryViewModel category)
-        {
-            Category categoryToAdd = new Category
-            {
-                Name = category.Name,
-                UrlSlug = category.UrlSlug,
-                Description = category.Description
-            };
-
-            this.Context.Categories.Add(categoryToAdd);
-            this.Context.SaveChanges();
-        }
-
-        public void EditPost(EditPostViewModel post)
-        {
-
-            BlogPost postToEdit = this.Context.Posts.Find(post.Id);
-            postToEdit.Id = post.Id;
-            postToEdit.Title = post.Title;
-            postToEdit.ShortContent = post.ShortContent;
-            postToEdit.Content = post.Content;
-            postToEdit.Category = this.GetOrAssignNewCategory(post.Category);
-            postToEdit.Modified = DateTime.Now;
-
-            var tags = post.Tags.Split(' ');
-
-            foreach (var tag in tags)
-            {
-                if (!this.CheckIfTagExist(tag))
-                {
-                    Tag tagToAdd = this.CreateNewTag(tag);
-                    postToEdit.Tags.Add(tagToAdd);
-                }
-            }
-
-            this.Context.SaveChanges();
-        }
-
-        public void AddNewTag(TagViewModel tag)
-        {
-            this.Context.Tags.Add(new Tag { Name = tag.Name, UrlSlug = tag.UrlSlug, Description = tag.Description });
             this.Context.SaveChanges();
         }
 
@@ -185,6 +110,105 @@
                 Category = post.Category.Name,
                 Tags = String.Join(" ", post.Tags.Select(t => t.Name))
             };
+        }
+
+        public DeletePostViewModel GetPostForDelete(int? id)
+        {
+            BlogPost post = this.Context.Posts.Find(id);
+
+            return new DeletePostViewModel { Title = post.Title, CreatedOn = post.CreatedOn };
+        }
+
+        public void EditPost(EditPostViewModel post)
+        {
+
+            BlogPost postToEdit = this.Context.Posts.Find(post.Id);
+            postToEdit.Id = post.Id;
+            postToEdit.Title = post.Title;
+            postToEdit.ShortContent = post.ShortContent;
+            postToEdit.Content = post.Content;
+            postToEdit.Category = this.Context.Categories.FirstOrDefault(c => c.Name == post.Category);
+            postToEdit.Modified = DateTime.Now;
+
+            var tags = post.Tags.Split(' ');
+
+            foreach (var tag in tags)
+            {
+                if (!this.CheckIfTagExist(tag))
+                {
+                    Tag tagToAdd = this.CreateNewTag(tag);
+                    postToEdit.Tags.Add(tagToAdd);
+                }
+            }
+
+            this.Context.SaveChanges();
+        }
+
+        public void RemovePost(int id)
+        {
+            var post = this.Context.Posts.Find(id);
+            this.Context.Posts.Remove(post);
+            this.Context.SaveChanges();
+        }
+
+        //Categories
+        public IEnumerable<SelectListItem> GetCatgoriesForDropdown()
+        {
+            return this.Context.Categories.OrderBy(c => c.Name).Select(c => new SelectListItem { Value = c.Name.ToString(), Text = c.Name }).ToList();
+        }
+
+        public IEnumerable<CategoryViewModel> GetAllCategories()
+        {
+            IEnumerable<CategoryViewModel> categories = this.Context
+                                                            .Categories
+                                                            .Select(c => new CategoryViewModel
+                                                                {
+                                                                    Id = c.Id,
+                                                                    Name = c.Name,
+                                                                    UrlSlug = c.UrlSlug,
+                                                                    Description = c.Description
+                                                                })
+                                                            .ToList();
+
+            return categories;
+        }
+
+        public void AddNewCategory(CategoryViewModel category)
+        {
+            Category categoryToAdd = new Category
+            {
+                Name = category.Name,
+                UrlSlug = category.UrlSlug,
+                Description = category.Description
+            };
+
+            this.Context.Categories.Add(categoryToAdd);
+            this.Context.SaveChanges();
+        }
+
+        public void EditCategory(CategoryViewModel category)
+        {
+            Category categoryToEdit = this.Context.Categories.Find(category.Id);
+
+            categoryToEdit.Name = category.Name;
+            categoryToEdit.UrlSlug = category.UrlSlug;
+            categoryToEdit.Description = category.Description;
+
+            this.Context.SaveChanges();
+        }
+
+        public void RemoveCategory(int id)
+        {
+            Category category = this.Context.Categories.Find(id);
+            this.Context.Categories.Remove(category);
+            this.Context.SaveChanges();
+        }
+
+        //Tags
+        public void AddNewTag(TagViewModel tag)
+        {
+            this.Context.Tags.Add(new Tag { Name = tag.Name, UrlSlug = tag.UrlSlug, Description = tag.Description });
+            this.Context.SaveChanges();
         }
 
         public void EditTag(TagViewModel tag)
@@ -205,17 +229,6 @@
             return new TagViewModel { Name = tag.Name, UrlSlug = tag.UrlSlug, Description = tag.Description };
         }
 
-        public void EditCategory(CategoryViewModel category)
-        {
-            Category categoryToEdit = this.Context.Categories.Find(category.Id);
-
-            categoryToEdit.Name = category.Name;
-            categoryToEdit.UrlSlug = category.UrlSlug;
-            categoryToEdit.Description = category.Description;
-
-            this.Context.SaveChanges();
-        }
-
         public void RemoveTag(int id)
         {
             Tag tag = this.Context.Tags.Find(id);
@@ -223,16 +236,10 @@
             this.Context.SaveChanges();
         }
 
+        //
         public bool PostWithSuchTag(int id)
         {
             return this.Context.Tags.Any(t => t.Id == id);
-        }
-
-        public DeletePostViewModel GetPostForDelete(int? id)
-        {
-            BlogPost post = this.Context.Posts.Find(id);
-
-            return new DeletePostViewModel { Title = post.Title, CreatedOn = post.CreatedOn };
         }
 
         public bool PostWithSuchCategory(int id)
@@ -240,38 +247,9 @@
             return this.Context.Posts.Any(p => p.CategoryId == id);
         }
 
-        public void RemoveCategory(int id)
+        private bool CheckIfTagExist(string tag)
         {
-            Category category = this.Context.Categories.Find(id);
-            this.Context.Categories.Remove(category);
-            this.Context.SaveChanges();
-        }
-
-        private Category GetOrAssignNewCategory(string category)
-        {
-            if (this.Context.Categories.Any(c => c.Name == category))
-            {
-                return this.Context.Categories.FirstOrDefault(c => c.Name == category);
-            }
-
-            Category newCategory = new Category
-            {
-                Name = category,
-                UrlSlug = "TODO",
-                Description = "TODO"
-            };
-
-            this.Context.Categories.Add(newCategory);
-            this.Context.SaveChanges();
-
-            return newCategory;
-        }
-
-        public void RemovePost(int id)
-        {
-            var post = this.Context.Posts.Find(id);
-            this.Context.Posts.Remove(post);
-            this.Context.SaveChanges();
+            return this.Context.Tags.Any(t => t.Name == tag);
         }
 
         private ICollection<Tag> GetOrAssignNewTags(string tags)
@@ -308,9 +286,6 @@
             return this.Context.Tags.FirstOrDefault(t => t.Name == tag);
         }//
 
-        private bool CheckIfTagExist(string tag)
-        {
-            return this.Context.Tags.Any(t => t.Name == tag);
-        }
+       
     }
 }

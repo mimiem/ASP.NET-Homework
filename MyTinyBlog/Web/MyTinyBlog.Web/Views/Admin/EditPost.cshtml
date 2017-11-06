@@ -38,8 +38,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+                    @Html.DropDownList("Category", (IEnumerable<SelectListItem>)ViewBag.Categories, "Select ...")
                 </div>
             </div>
             <div class="form-group">

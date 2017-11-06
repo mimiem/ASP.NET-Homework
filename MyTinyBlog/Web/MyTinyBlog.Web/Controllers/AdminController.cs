@@ -38,6 +38,9 @@
         [HttpGet]
         public ViewResult AddPost()
         {
+            IEnumerable<SelectListItem> categories = this.service.GetCatgoriesForDropdown();
+            ViewBag.Categories = categories;
+
             return View();
         }
 
@@ -62,6 +65,8 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            IEnumerable<SelectListItem> categories = this.service.GetCatgoriesForDropdown();
+            ViewBag.Categories = categories;
             EditPostViewModel post = this.service.GetPostForEdit(id);
             
             return View(post);

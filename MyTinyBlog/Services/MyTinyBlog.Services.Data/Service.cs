@@ -23,6 +23,19 @@
             return categoryVM;
         } //
 
+        public IEnumerable<TagViewModel> GetAllTags()
+        {
+            return this.Context
+                       .Tags
+                       .OrderBy(t => t.Name)
+                       .ToList()
+                       .Select(c => new TagViewModel
+                       {
+                           Name = c.Name,
+                           UrlSlug = c.UrlSlug
+                       });
+        }
+
         protected IEnumerable<TagViewModel> GetTags(ICollection<Tag> targetTags)
         {
             IEnumerable<TagViewModel> tags = this.Context

@@ -176,19 +176,7 @@
             return postsVM;
         }
 
-        private IEnumerable<TagViewModel> GetAllTags()
-        {
-            return this.Context
-                       .Tags
-                       .OrderBy(t => t.Name)
-                       .Take(5)
-                       .ToList()
-                       .Select(c => new TagViewModel
-            {
-                Name = c.Name,
-                UrlSlug = c.UrlSlug
-            });
-        }
+        
 
         private IEnumerable<CategoryViewModel> GetAllCategories()
         {
